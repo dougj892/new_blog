@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>bayes on Doug Johnson&#39;s website</title>
+    <link>/tags/bayes/</link>
+    <description>Recent content in bayes on Doug Johnson&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020</copyright>
+    <lastBuildDate>Mon, 20 Apr 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/bayes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Test post</title>
+      <link>/post/test-post/</link>
+      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/test-post/</guid>
+      <description>This is a test post using R markdown.
+\[ \sigma^2 = \sum x \]
+ggplot(diamonds, aes(carat, price)) + geom_point()Testing a tweet snippet.
+Indonesia has shifted its anti-poverty strategy, gradually moving from subsidising basic commodities to targeted assistance programs for the poor. Today&amp;#39;s blog shares key learnings from randomised evaluations on the impact of anti-poverty programs. https://t.co/2FLnKF7IUo
+&amp;mdash; devpolicy.org (@devpolicy) April 21, 2020  </description>
+    </item>
+    
+  </channel>
+</rss>
