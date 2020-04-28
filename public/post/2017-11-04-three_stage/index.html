@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Three Stage Sampling | Doug Johnson&#39;s website</title>
+
+<meta property='og:title' content='Three Stage Sampling - Doug Johnson&#39;s website'>
+<meta property='og:description' content='Caveat emptor: This blog post has not been checked for errors. Based on prior experience, I expect there will be several errors in the post.
+The IDIRI is in the process of designing the sampling strategy for a large scale household survey and is considering using a three stage sampling design in which they would first select districts, then villages (or urban wards), and then households. In addition, someone was asking about three stage clustering for an RCT somewhere on Slack (I can&rsquo;t seem to find the slack post now) so I thought it might be useful to write a short post on three stage designs.'>
+<meta property='og:url' content='/post/2017-11-04-three_stage/'>
+<meta property='og:site_name' content='Doug Johnson&#39;s website'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/9f47a5820df24e7aae1e744e9b53bc38?s=256'><meta property='article:section' content='Post'><meta property='article:published_time' content='2017-10-04T10:40:48-04:00'/><meta property='article:modified_time' content='2017-10-04T10:40:48-04:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@dougj8921'><meta name='twitter:creator' content='@dougj8921'>
+
+
+<link href="/index.xml" rel="alternate" type="application/rss+xml" title="Doug Johnson&#39;s website" />
+
+<link rel="stylesheet" href="/css/style.css"/><link rel='stylesheet' href='/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="canonical" href="/post/2017-11-04-three_stage/">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <nav id="nav-main" class="nav">
+      <div id="nav-name" class="nav-left">
+        <a id="nav-anchor" class="nav-item" href="/">
+          <h1 id="nav-heading" class="title is-4">Doug Johnson&#39;s website</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav id="nav-items" class="nav-item level is-mobile"><a class="level-item" aria-label="github" href='https://github.com/dougj892'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="twitter" href='https://twitter.com/dougj8921'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="email" href='mailto:dougj892@gmail.com'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+    <polyline points="22,6 12,13 2,6"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="linkedin" href='https://linkedin.com/in/doug-johnson-15a1993'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8" d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z"/>
+    
+  </svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+
+    <nav class="nav">
+      
+
+      
+    </nav>
+
+  </div>
+  <script src="/js/navicon-shift.js"></script>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">October 4, 2017</h2>
+    <h1 class="title">Three Stage Sampling</h1>
+    
+    <div class="content">
+      <p><em>Caveat emptor: This blog post has not been checked for errors. Based on prior experience, I expect there will be several errors in the post.</em></p>
+<p>The IDIRI is in the process of designing the sampling strategy for a large scale household survey and is considering using a three stage sampling design in which they would first select districts, then villages (or urban wards), and then households.  In addition, someone was asking about three stage clustering for an RCT somewhere on Slack (I can&rsquo;t seem to find the slack post now) so I thought it might be useful to write a short post on three stage designs.</p>
+<p>In this post, I&rsquo;ll try to answer four questions:</p>
+<ol>
+<li>When do you need to take into account both stages of clustering in a survey or evaluation?</li>
+<li>How do you properly account for a three stage design when performing sample size / power calculations?</li>
+<li>How should you estimate the inputs required for these calculations?</li>
+<li>How do you properly account for a three stage design when analyzing data?</li>
+</ol>
+<h1 id="when-you-do-you-need-to-take-into-both-stages">When you do you need to take into both stages?</h1>
+<p>With an RCT, it&rsquo;s pretty rare that you really need to take into account two stages of clustering. Remember that just because units exhibit some sort of clustering doesn&rsquo;t mean that you need to adjust for clustering in your analysis.  For example, if you randomize at the student level it doesn&rsquo;t matter that student learning outcomes exhibit clustering at the classroom level.  An example of when you might want to take into account two stages of clustering is when you randomize large clusters (e.g. schools) and then only collect data from units in a randomly sampled set of smaller clusters (e.g. kids in classrooms).  With surveys, anytime you have a three stage design you should theoretically take into account the clustering at both levels.</p>
+<p>Even when it makes sense in theory to take into account both stages of clustering, you can usually get by with just considering the most aggregate (highest) level of clustering.  We&rsquo;ll see below why that makes sense.  In some cases, e.g. when you are trying to find the optimal survey design for a given budget, you do really need to take into account both stages of clustering.</p>
+<h1 id="how-do-you-account-for-a-three-stage-design">How do you account for a three stage design?</h1>
+<p><em>(The advice given below is tailored to someone performing sampling size calcs for a survey with a three stage design.  All of the advice holds true for power calcs as well.  You just need to multiply the final variance by 2 (since you have 2 groups &ndash; treatment and control) and then use the standard adjustment to the standard error for power calcs &ndash; i.e. instead of multiplying the standard error by +/-1.96 to create a 95% confidence interval you multiply by ~2.8 to calculate an MDE for alpha .05 and power .8.)</em></p>
+<p>Let&rsquo;s first recap how one stage of clustering affects the variance of your estimator.  Let&rsquo;s say that you will use a two stage sampling strategy in which you will first randomly sample J clusters and then randomly sample K units from each cluster to estimate the mean of some variable y.  Further assume that the total number of units per cluster does not vary and is pretty large.  If values of y are correlated within each cluster, we can think of the values for y as being made up of a cluster component and an independent within-cluster component, i.e.</p>
+<p>$$y_{j,k}=\eta_j+\phi_{j,k}$$</p>
+<p>This allows us to calculate the variance the of y as:</p>
+<p>$$\sigma^2_y=\sigma^2_{\eta}+\sigma^2_{\phi}$$</p>
+<p>And the variance of the mean as:</p>
+<p>$$Var(\bar{y})=\frac{\sigma^2_{\eta}}{J}+\frac{\sigma^2_{\phi}}{JK}=\sigma^2_y\left(\frac{\rho}{J}+\frac{(1-\rho)}{JK}\right)$$</p>
+<p>Where \( \rho=\frac{\sigma^2_{\eta}}{\sigma^2_y} \).  It&rsquo;s also useful to calculate the design effect, or the ratio of the variance of this estimator to the ratio of the estimator if the sample had been collected using simple random sampling (SRS). Since the variance under SRS would be \( \frac{\sigma^2_y}{JK} \) the design effect\(=1+(K-1)\rho\).</p>
+<p>Let&rsquo;s now suppose that we have a higher level sampling stage. We first pick Q mega-clusters, then J clusters from each mega-cluster, and then K households from each cluster.  Similarly, we can think of the values y as made of three components:</p>
+<p>$$y_{q,j,k}=\gamma_q+\eta_{q,j}+\phi_{q,j,k}$$</p>
+<p>The variance of y is then:</p>
+<p>$$\sigma^2_y=\sigma^2_{\gamma}+\sigma^2_{\eta}+\sigma^2_{\phi}$$</p>
+<p>And the variance of the mean is:</p>
+<p>$$Var(\bar{y})=\frac{\sigma^2_{\gamma}}{Q}+\frac{\sigma^2_{\eta}}{QJ}+\frac{\sigma^2_{\phi}}{QJK}=\sigma^2_y\left(  \frac{\rho_{\gamma}}{Q}+\frac{\rho_{\eta}}{QJ}+\frac{(1-\rho_{\gamma}-\rho_{\eta})}{QJK} \right)$$</p>
+<p>Where \(\rho_{\eta}=\frac{\sigma^2_{\eta}}{\sigma^2_y}\) and \(\rho_{\gamma}=\frac{\sigma^2_{\gamma}}{\sigma^2_y}\).  For our three stage sampling design, the design effect is:</p>
+<p>$$DEFF=1+(K-1)\rho_{\eta}+(JK-1)\rho_{\gamma}$$</p>
+<p>This also shows why just looking at the most aggregate level of clustering is usually pretty reasonable &ndash; assuming the two ICCs are relatively similar in size, the adjustment to the variance will be driven primarily by the most aggregate level of clustering.</p>
+<h1 id="how-should-you-estimate-the-inputs-required-for-these-calculations">How should you estimate the inputs required for these calculations?</h1>
+<p>Now that we know how to adjust our estimate of the variance using the ICC at both levels, the next obvious questions is where to find the different values for the ICC.</p>
+<p>If you are lucky, you might find a dataset which includes both levels of clustering and the variable you are interested (or some similiar variable).  If so, then you can use Stata&rsquo;s anova command to estimate the two ICCs.  I&rsquo;m not really sure how to do this is Stata, but I think that it should be relatively straightforward if you search the help file for &ldquo;nested anova.&rdquo;  (And if you figure out how to do it please let me know!)</p>
+<p>Alternatively, you can resort to the typical hack of using a design effect calculated from another survey with a similar three stage design.  <a href="https://unstats.un.org/unsd/hhsurveys/pdf/Chapter_7.pdf">Here</a> are a few design effects from which to draw from. (As an aside, it would also be useful for us to start recording the design effects for key variables from our own surveys.  To get the design effect for a survey dataset in Stata first &ldquo;svyset&rdquo; your dataset, then estimate the population mean of a variable using &ldquo;svy: mean <!-- raw HTML omitted -->&rdquo;, and then run &ldquo;estat effects&rdquo; to get the design effect for the estimate.)</p>
+<h1 id="how-do-you-properly-account-for-a-three-stage-design-when-analyzing-data">How do you properly account for a three stage design when analyzing data?</h1>
+<p>Unfortunately, most Stata commands only allow for a single stage of clustering.  To account for two or more stages of clustering, you need to first &ldquo;svyset&rdquo; your data and then use the &ldquo;svy&rdquo; prefix before running any command.</p>
+
+      
+      <div class="related">
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+  
+    <div id="show_comments"><a id="load_comments" class="button is-link">Load comments</a></div>
+  
+    <script type="text/javascript">
+      var disqus_shortname = 'shortname';
+      function disqus() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+  
+      
+      var hash = window.location.hash.substr(1);
+      if ((hash.length > 8) && (hash.substring(0, 8) === "comment-")) {
+        disqus();
+        document.getElementById("show_comments").style.display = "none";
+      } else {
+        document.getElementById('load_comments').onclick = function() {
+          disqus();
+          document.getElementById("show_comments").style.display = "none";
+        };
+      }
+  
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/dougj892">Doug Johnson</a> 2020. Site design by <a href="https://github.com/ribic">Emir Ribic</p>
+    
+      <p>Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/ribice/kiss">Kiss</a>.</p>
+    
+  </div>
+</section>
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="\/\/matomo.example.com\/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript>
+  <img src="//matomo.example.com/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
+</noscript>
+
+<script>
+    (function(f, a, t, h, o, m){
+        a[h]=a[h]||function(){
+            (a[h].q=a[h].q||[]).push(arguments)
+        };
+        o=f.createElement('script'),
+        m=f.getElementsByTagName('script')[0];
+        o.async=1; o.src=t; o.id='fathom-script';
+        m.parentNode.insertBefore(o,m)
+    })(document, window, '\/\/fathom.example.com\/tracker.js', 'fathom');
+    fathom('trackPageview');
+</script>
+</body>
+
+
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    
+</html>
+
+

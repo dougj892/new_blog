@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Small n evaluations - what to do with a p-value of .23 | Doug Johnson&#39;s website</title>
+
+<meta property='og:title' content='Small n evaluations - what to do with a p-value of .23 - Doug Johnson&#39;s website'>
+<meta property='og:description' content='What do you do when you run an evaluation and your estimate of the treatment effect is large but the p-value is only 0.23? 0.23 is better than 0.5, but then again it is quite a bit larger than the typically used thresholds of 0.05 and 0.1.
+Of course, what we, and the client, really want is not a p-value but a probability. For example, let&rsquo;s suppose that there is another intervention that costs about the same and which we think has an effect of \(\delta\).'>
+<meta property='og:url' content='/post/2016-07-30-small-n/'>
+<meta property='og:site_name' content='Doug Johnson&#39;s website'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/9f47a5820df24e7aae1e744e9b53bc38?s=256'><meta property='article:section' content='Post'><meta property='article:published_time' content='2016-07-30T10:40:48-04:00'/><meta property='article:modified_time' content='2016-07-30T10:40:48-04:00'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@dougj8921'><meta name='twitter:creator' content='@dougj8921'>
+
+
+<link href="/index.xml" rel="alternate" type="application/rss+xml" title="Doug Johnson&#39;s website" />
+
+<link rel="stylesheet" href="/css/style.css"/><link rel='stylesheet' href='/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="canonical" href="/post/2016-07-30-small-n/">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <nav id="nav-main" class="nav">
+      <div id="nav-name" class="nav-left">
+        <a id="nav-anchor" class="nav-item" href="/">
+          <h1 id="nav-heading" class="title is-4">Doug Johnson&#39;s website</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav id="nav-items" class="nav-item level is-mobile"><a class="level-item" aria-label="github" href='https://github.com/dougj892'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="twitter" href='https://twitter.com/dougj8921'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="email" href='mailto:dougj892@gmail.com'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+    <polyline points="22,6 12,13 2,6"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="linkedin" href='https://linkedin.com/in/doug-johnson-15a1993'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8" d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z"/>
+    
+  </svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+
+    <nav class="nav">
+      
+
+      
+    </nav>
+
+  </div>
+  <script src="/js/navicon-shift.js"></script>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+    </div>
+    <h2 class="subtitle is-6">July 30, 2016</h2>
+    <h1 class="title">Small n evaluations - what to do with a p-value of .23</h1>
+    
+    <div class="content">
+      <p>What do you do when you run an evaluation and your estimate of the treatment effect is large but the p-value is only 0.23? 0.23 is better than 0.5, but then again it is quite a bit larger than the typically used thresholds of 0.05 and 0.1.</p>
+<p>Of course, what we, and the client, really want is not a p-value but a probability.  For example, let&rsquo;s suppose that there is another intervention that costs about the same and which we think has an effect of \(\delta\).  In that case, what we really want to know is the probability that the intervention we are evaluating has an effect greater than \(\delta\). I illustrate how to do this using a simple example.</p>
+<h2 id="input-some-fake-data">Input some fake data</h2>
+<p>First, let&rsquo;s input some fake data for a binary treatment and a binary outcome. Assume that this data came from a randomized experiment.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Create two vectors of fake data: one for a binary outcome and one for a binary treatment</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+outcome <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>,
+       <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>,
+       <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>,
+       <span style="color:#ae81ff">0</span>])
+treat_status <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>,
+       <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>,
+       <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>,
+       <span style="color:#ae81ff">1</span>])
+</code></pre></div><h2 id="run-a-logit-on-the-fake-data">Run a logit on the fake data</h2>
+<p>Next, let&rsquo;s run a standard logit on this data. Note that when we run the logit, the estimate of the treatment effect is reasonable large but the p-value is only 0.23.  (Apologies for all the python code but it is much easier to do all of this in python than Stata though it is also possible in Stata. Note that the following code is equivalent to running &ldquo;logit outcome treat_status&rdquo; in Stata.)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> statsmodels.api <span style="color:#f92672">as</span> sm
+X <span style="color:#f92672">=</span> sm<span style="color:#f92672">.</span>add_constant(treat_status)
+model <span style="color:#f92672">=</span> sm<span style="color:#f92672">.</span>GLM(outcome, X, family <span style="color:#f92672">=</span> sm<span style="color:#f92672">.</span>families<span style="color:#f92672">.</span>Binomial())
+<span style="color:#66d9ef">print</span>(model<span style="color:#f92672">.</span>fit()<span style="color:#f92672">.</span>summary())
+</code></pre></div><pre><code>                 Generalized Linear Model Regression Results                  
+==============================================================================
+Dep. Variable:                      y   No. Observations:                   70
+Model:                            GLM   Df Residuals:                       68
+Model Family:                Binomial   Df Model:                            1
+Link Function:                  logit   Scale:                             1.0
+Method:                          IRLS   Log-Likelihood:                -45.951
+Date:                Sun, 31 Jul 2016   Deviance:                       91.902
+Time:                        11:09:16   Pearson chi2:                     70.0
+No. Iterations:                     6                                         
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [95.0% Conf. Int.]
+------------------------------------------------------------------------------
+const          0.1335      0.366      0.365      0.715        -0.584     0.851
+x1             0.5974      0.498      1.200      0.230        -0.378     1.573
+==============================================================================
+</code></pre>
+<h2 id="fit-a-bayesian-logit">Fit a Bayesian logit</h2>
+<p>The code below fits a Bayesian logit model to this data.  The key lines of code to pay attention to are 13 and 14. These lines specify the &ldquo;prior&rdquo; for the model parameters &ndash; or our ex-ante beliefs of the effectiveness of the intervention before conducting the experiment.  In this case, my prior is that the intercept for the logit model (alpha) is distributed normally with mean 0 and standard deviation 10 and the slope for the logit model (beta) is also distributed normally with mean 0 and standard deviation 10.  In other words, ex-ante, I think that there is a 50/50 chance that the intervention has a positive effect.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pystan
+stan_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">data {
+</span><span style="color:#e6db74">    int&lt;lower=0&gt; N;  // number of observations
+</span><span style="color:#e6db74">    int&lt;lower=0,upper=1&gt; y[N];  // outcome data
+</span><span style="color:#e6db74">    vector[N] treat;  // variable indicating treatment arm for each observation
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">parameters {
+</span><span style="color:#e6db74">    real alpha;
+</span><span style="color:#e6db74">    real beta;
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">model {
+</span><span style="color:#e6db74">    alpha ~ normal(0,10);  // our prior for alpha
+</span><span style="color:#e6db74">    beta ~ normal(0,10); // our prior for beta
+</span><span style="color:#e6db74">    y ~ bernoulli_logit(alpha + beta*treat);
+</span><span style="color:#e6db74">}    
+</span><span style="color:#e6db74">generated quantities {
+</span><span style="color:#e6db74">    real effect;
+</span><span style="color:#e6db74">    effect &lt;- inv_logit(alpha+beta)-inv_logit(alpha);
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+stan_data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;N&#39;</span>: len(outcome),
+        <span style="color:#e6db74">&#39;y&#39;</span>: outcome,
+        <span style="color:#e6db74">&#39;treat&#39;</span>: treat_status }
+fit <span style="color:#f92672">=</span> pystan<span style="color:#f92672">.</span>stan(model_code<span style="color:#f92672">=</span>stan_code, data<span style="color:#f92672">=</span>stan_data, iter<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, chains<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</code></pre></div><h1 id="analyze-the-results">Analyze the results</h1>
+<p>Now that we have fit the model, we want to use the results to estimate the probability that the effect of the intervention is greater than \(\delta\).  The code above spits out a vector of values for &ldquo;effect size.&rdquo; These values are approximate draws from the &ldquo;posterior&rdquo; for the effect size.  In other words, the vector contains a bunch of values drawn from the distribution of the effect size where the distribution is calculated using the model above.</p>
+<p>Let&rsquo;s first extract the vector for the posterior values and graph the values using a histogram.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">%</span> matplotlib inline
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+
+effect_sim <span style="color:#f92672">=</span> fit<span style="color:#f92672">.</span>extract()[<span style="color:#e6db74">&#39;effect&#39;</span>]
+sns<span style="color:#f92672">.</span>distplot(effect_sim)
+</code></pre></div><p><img src="/assets/dist_effect_size.png" alt=""></p>
+<p>Next, let&rsquo;s calculate the probability that the effect is greater than \(\delta\).  For this example, let&rsquo;s assume \(\delta\) is equal to .05.  In other words, the other intervention we are comparing our intervention to causes a 5 percentage point increase in the probability of the outcome being a success.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># calculate the probability that effect size is greater than 0</span>
+(effect_sim <span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0.05</span>)<span style="color:#f92672">.</span>sum()<span style="color:#f92672">/</span>len(effect_sim)
+</code></pre></div><pre><code>0.75849999999999995
+</code></pre>
+<h2 id="takeaway">Takeaway</h2>
+<p>According to our model, the probability that the effect of the new intervention is greater than the intervention that we are comparing it to is 76%! Despite the large p-value for our initial analysis, the more thorough Bayesian shows that our message to the client should be clear: you should definitely take up this intervention.</p>
+<p>I should add one last cavet. In this example, a relatively large p-value ended up translating into a relatively large probability that the intervention is effective.  Please note that this is not always going to be the case!  Also note that I have glossed over several details in fitting the model.  For example, we should always check that our model appeared to converge on a stable distribution.</p>
+
+      
+      <div class="related">
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+    <script src="/js/copycode.js"></script>
+
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+  
+    <div id="show_comments"><a id="load_comments" class="button is-link">Load comments</a></div>
+  
+    <script type="text/javascript">
+      var disqus_shortname = 'shortname';
+      function disqus() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+  
+      
+      var hash = window.location.hash.substr(1);
+      if ((hash.length > 8) && (hash.substring(0, 8) === "comment-")) {
+        disqus();
+        document.getElementById("show_comments").style.display = "none";
+      } else {
+        document.getElementById('load_comments').onclick = function() {
+          disqus();
+          document.getElementById("show_comments").style.display = "none";
+        };
+      }
+  
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/dougj892">Doug Johnson</a> 2020. Site design by <a href="https://github.com/ribic">Emir Ribic</p>
+    
+      <p>Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/ribice/kiss">Kiss</a>.</p>
+    
+  </div>
+</section>
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="\/\/matomo.example.com\/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript>
+  <img src="//matomo.example.com/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
+</noscript>
+
+<script>
+    (function(f, a, t, h, o, m){
+        a[h]=a[h]||function(){
+            (a[h].q=a[h].q||[]).push(arguments)
+        };
+        o=f.createElement('script'),
+        m=f.getElementsByTagName('script')[0];
+        o.async=1; o.src=t; o.id='fathom-script';
+        m.parentNode.insertBefore(o,m)
+    })(document, window, '\/\/fathom.example.com\/tracker.js', 'fathom');
+    fathom('trackPageview');
+</script>
+</body>
+
+
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    
+</html>
+
+

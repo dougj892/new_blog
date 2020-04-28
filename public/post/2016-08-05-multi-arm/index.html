@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Bayesian Analysis for Multi-arm Trials | Doug Johnson&#39;s website</title>
+
+<meta property='og:title' content='Bayesian Analysis for Multi-arm Trials - Doug Johnson&#39;s website'>
+<meta property='og:description' content='Bayesian Analysis for Decision Focused Evaluations When analyzing data from our evaluations, we typically use a &ldquo;frequentist&rdquo; or &ldquo;null hypothesis testing&rdquo; approach. If you haven&rsquo;t heard the term &ldquo;frequentist&rdquo; that&rsquo;s probably because this approach is so dominant in academia that most people simply think of it as the approach to doing statistics.
+There is an alternative approach to doing statistics though: the Bayesian approach. In this blog post I hope to show that Bayesian analysis may be particularly useful for the work we do by going through the use of a simplified example application inspired by a recent proejct.'>
+<meta property='og:url' content='/post/2016-08-05-multi-arm/'>
+<meta property='og:site_name' content='Doug Johnson&#39;s website'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/9f47a5820df24e7aae1e744e9b53bc38?s=256'><meta property='article:section' content='Post'><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@dougj8921'><meta name='twitter:creator' content='@dougj8921'>
+
+
+<link href="/index.xml" rel="alternate" type="application/rss+xml" title="Doug Johnson&#39;s website" />
+
+<link rel="stylesheet" href="/css/style.css"/><link rel='stylesheet' href='/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="canonical" href="/post/2016-08-05-multi-arm/">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <nav id="nav-main" class="nav">
+      <div id="nav-name" class="nav-left">
+        <a id="nav-anchor" class="nav-item" href="/">
+          <h1 id="nav-heading" class="title is-4">Doug Johnson&#39;s website</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav id="nav-items" class="nav-item level is-mobile"><a class="level-item" aria-label="github" href='https://github.com/dougj892'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="twitter" href='https://twitter.com/dougj8921'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="email" href='mailto:dougj892@gmail.com'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+    <polyline points="22,6 12,13 2,6"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="linkedin" href='https://linkedin.com/in/doug-johnson-15a1993'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8" d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z"/>
+    
+  </svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+
+    <nav class="nav">
+      
+
+      
+    </nav>
+
+  </div>
+  <script src="/js/navicon-shift.js"></script>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+    </div>
+    
+    <h1 class="title">Bayesian Analysis for Multi-arm Trials</h1>
+    
+    <div class="content">
+      <h1 id="bayesian-analysis-for-decision-focused-evaluations">Bayesian Analysis for Decision Focused Evaluations</h1>
+<p>When analyzing data from our evaluations, we typically use a &ldquo;frequentist&rdquo; or &ldquo;null hypothesis testing&rdquo; approach.  If you haven&rsquo;t heard the term &ldquo;frequentist&rdquo; that&rsquo;s probably because this approach is so dominant in academia that most people simply think of it as <em>the</em> approach to doing statistics.</p>
+<p>There is an alternative approach to doing statistics though: the Bayesian approach.  In this blog post I hope to show that Bayesian analysis may be particularly useful for the work we do by going through the use of a simplified example application inspired by a recent proejct.</p>
+<p>I&rsquo;m going to use a couple of programming languages which you might not be familiar to work through the example: Python and Stan.  If you don&rsquo;t know these languages, don&rsquo;t worry. Most of the key points will be clear even if you have not been exposed to these languages.  (If not, please let me know and I will try to clarify further by adding comments to the code.)</p>
+<h2 id="why-bayes">Why Bayes?</h2>
+<p>Bayes vs frequentist is a hotly contested debate so take this with a grain of salt but here&rsquo;s my take. Bayesian analysis is more useful when the purpose of the analysis is to inform a specific decision by a specific actor. This is because Bayesian analysis let&rsquo;s you take the actor&rsquo;s prior beliefs into account and the output from analysis tells the actor exactly what decision to make (i.e. &ndash; you can just tell the client &ldquo;you should do X&rdquo; rather than trying to explain what a p-value is). You may be asking &ldquo;if this is true, why is frequentist analysis the dominant paradigm?&rdquo; This is because frequentist analysis is more useful when there are a lot of people performing a lot of evaluations and the purpose of each analysis is to convince the larger community that the results are not due to chance.  Thus, while frequentist analysis is a reasonable approach in academia and for knowledge focused evaluations I think that Bayesian analysis is more useful for decision focused evaluations.</p>
+<p>Here&rsquo;s XKCD on the difference between the two approaches:</p>
+<p><img src="http://imgs.xkcd.com/comics/frequentists_vs_bayesians.png" alt="title"></p>
+<h2 id="a-motivating-example">A Motivating Example</h2>
+<p>I am currently involved in a five arm RCT for a client here in India.  The main purpose of this evaluation is help the client, an NGO, determine which of the five interventions they should drop and which they should continue to implement.  In order to make this decision, the client wants to know the probability of each treatment arm having the largest effect.  Unfortunately, it&rsquo;s hard to give a straight answer to that question using a frequentist approach.  We can answer questions like &ldquo;what is the probability that we would see data this extreme if treatment arm 1 actually has no effect&rdquo; or &ldquo;what is the probability that we would see data as extreme as this if treatment arm 1 and treatment arm 2 actually have the same effect&rdquo; but it&rsquo;s very difficult to estimate the probability of each treatment arm having the largest effect.</p>
+<h2 id="step-1-generate-some-data">Step 1: Generate Some Data</h2>
+<p>In future blog posts, I hope to use real client data to demonstrate this approach but for now let&rsquo;s start with some fake data.  To generate some fake data, I assume the true data generating process for the RCT is&hellip;</p>
+<p>$$ y_i \sim N(\tau_{j[i]},\sigma_y^2) $$</p>
+<p>Where i indexes households, j indexes treatment arms, and j = 0 indicates the control group. I pick arbitrary values for the parameters.  The code for generating this data in Python is included below but again, don&rsquo;t worry if the details don&rsquo;t make sense.</p>
+<p><em>Note: If you don&rsquo;t want to go through the code, you can skip down until &ldquo;Step 3&rdquo;</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># import numpy -- this is a python &#34;package&#34; for linear algebra</span>
+<span style="color:#f92672">import</span> numpy <span style="color:#f92672">as</span> np
+
+<span style="color:#75715e"># Initialize random number generator</span>
+np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">123</span>)
+
+<span style="color:#75715e"># Set values for the various parameters in the data generating equation. </span>
+sigma <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+tau <span style="color:#f92672">=</span> [<span style="color:#f92672">.</span><span style="color:#ae81ff">1</span>,<span style="color:#f92672">.</span><span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">1.6</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">0</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">0.7</span>]
+
+<span style="color:#75715e"># Size of each treatment arm</span>
+size_arms <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">20</span>, <span style="color:#ae81ff">15</span>])
+
+<span style="color:#75715e"># generate a vector indicating the arm for each observation. </span>
+<span style="color:#75715e"># I add 1 because array indices start with 0 in python but 1 in Stan</span>
+arm <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>repeat(np<span style="color:#f92672">.</span>arange(<span style="color:#ae81ff">6</span>),size_arms) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>
+
+<span style="color:#75715e"># Simulate outcome variable</span>
+Y <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>repeat(tau, size_arms)<span style="color:#f92672">+</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>randn(sum(size_arms))<span style="color:#f92672">*</span>sigma
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Graph this data to make sure it looks reasonable</span>
+<span style="color:#f92672">%</span>matplotlib inline
+<span style="color:#f92672">import</span> matplotlib.pyplot <span style="color:#f92672">as</span> plt
+<span style="color:#f92672">import</span> seaborn <span style="color:#f92672">as</span> sns
+<span style="color:#75715e"># this next line gives the graph the XCD feel</span>
+plt<span style="color:#f92672">.</span>xkcd()
+start <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">for</span> size <span style="color:#f92672">in</span> size_arms:
+    end <span style="color:#f92672">=</span> start <span style="color:#f92672">+</span> size
+    sns<span style="color:#f92672">.</span>distplot(Y[start:end], hist <span style="color:#f92672">=</span> False)
+    start <span style="color:#f92672">=</span> end
+</code></pre></div><p><img src="/assets/test_dist.png" alt=""></p>
+<p>This appears to be about what we would expect give our effect sizes.</p>
+<h2 id="step-2-fit-the-data-using-stan">Step 2: Fit the Data Using Stan</h2>
+<p>Great.  We&rsquo;ve generated some data.  Now we use Stan, a special purpose probabilistic programming language, to fit that data using a Bayesian hierarchical model.  I&rsquo;m going to use a model very similar to the data generating model to fit the data.  This is cheating a little bit, but it makes things a little simpler.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># import the pystan package.  this package allows python to call the Stan language</span>
+<span style="color:#f92672">import</span> pystan
+<span style="color:#75715e"># The next few lines define the model in Stan.  The entire Stan model is saved as the python variable</span>
+<span style="color:#75715e"># stan_code which I use later to fit the model. </span>
+stan_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;&#39;&#39;
+</span><span style="color:#e6db74">data {
+</span><span style="color:#e6db74">    int&lt;lower=0&gt; N;  // number of observations
+</span><span style="color:#e6db74">    int&lt;lower=1&gt; J;  // number of treatment arms
+</span><span style="color:#e6db74">    real y[N];  // outcome data
+</span><span style="color:#e6db74">    int&lt;lower=1,upper=J&gt; jj[N];  // variable indicating treatment arm for each observation
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">parameters {
+</span><span style="color:#e6db74">    real tau[J];
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">model {
+</span><span style="color:#e6db74">    tau ~ normal(0,10);  // Assign tau a multivariate normal prior with no correlations.  
+</span><span style="color:#e6db74">    // the above two statements shows how Stan automatically &#34;vectorizes&#34; operations where appropriate
+</span><span style="color:#e6db74">    for (n in 1:N)
+</span><span style="color:#e6db74">        y[n] ~ normal(tau[jj[n]], 5);
+</span><span style="color:#e6db74">}
+</span><span style="color:#e6db74">&#39;&#39;&#39;</span>
+stan_data <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;N&#39;</span>: sum(size_arms),
+        <span style="color:#e6db74">&#39;J&#39;</span>: len(size_arms),
+        <span style="color:#e6db74">&#39;y&#39;</span>: Y,
+        <span style="color:#e6db74">&#39;jj&#39;</span>: arm }
+
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fit <span style="color:#f92672">=</span> pystan<span style="color:#f92672">.</span>stan(model_code<span style="color:#f92672">=</span>stan_code, data<span style="color:#f92672">=</span>stan_data, iter<span style="color:#f92672">=</span><span style="color:#ae81ff">1000</span>, chains<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)
+</code></pre></div><pre><code>/Users/douglasjohnson/anaconda/lib/python3.5/multiprocessing/reduction.py:50: UserWarning: Pickling fit objects is an experimental feature!
+The relevant StanModel instance must be pickled along with this fit object.
+When unpickling the StanModel must be unpickled first.
+  cls(buf, protocol).dump(obj)
+/Users/douglasjohnson/anaconda/lib/python3.5/multiprocessing/reduction.py:50: UserWarning: Pickling fit objects is an experimental feature!
+The relevant StanModel instance must be pickled along with this fit object.
+When unpickling the StanModel must be unpickled first.
+  cls(buf, protocol).dump(obj)
+/Users/douglasjohnson/anaconda/lib/python3.5/multiprocessing/reduction.py:50: UserWarning: Pickling fit objects is an experimental feature!
+The relevant StanModel instance must be pickled along with this fit object.
+When unpickling the StanModel must be unpickled first.
+  cls(buf, protocol).dump(obj)
+/Users/douglasjohnson/anaconda/lib/python3.5/multiprocessing/reduction.py:50: UserWarning: Pickling fit objects is an experimental feature!
+The relevant StanModel instance must be pickled along with this fit object.
+When unpickling the StanModel must be unpickled first.
+  cls(buf, protocol).dump(obj)
+</code></pre>
+<h2 id="step-3-use-the-posterior-to-answer-the-clients-question">Step 3: Use the Posterior to Answer the Client&rsquo;s Question</h2>
+<p>After fitting our model, the final output is a set of draws from the &ldquo;posterior&rdquo; distribution of our parameters. That is, we get a big list each element of which is a draw from our estimated distribution of the parameters.  This is a much richer output than for Stata&rsquo;s &ldquo;regress&rdquo; command which only gives point estimates and an estimated covariance matrix for our parameters.</p>
+<p>Having access to the complete parameter distribution allows us to perform rich anlaysis on the parameters. For example, for each draw from the posterior distribution, we can look at which of the arms has the largest effect (i.e. which element of the vector $\tau_j$ is the largest).  This gives us the probability that each of the treatment arms is the &ldquo;best&rdquo; &ndash; what the client originally wanted.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># pandas is another python package that is really useful for manipulating datasets</span>
+<span style="color:#f92672">import</span> pandas <span style="color:#f92672">as</span> pd
+<span style="color:#75715e"># get the full set of draws from the posterior for tau and store this in tau_sim</span>
+tau_sim <span style="color:#f92672">=</span> fit<span style="color:#f92672">.</span>extract()[<span style="color:#e6db74">&#39;tau&#39;</span>]
+<span style="color:#75715e"># for each of the draws from the posterior, identify which element of tau is the largest</span>
+results <span style="color:#f92672">=</span>  pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;max&#39;</span>:np<span style="color:#f92672">.</span>argmax(tau_sim, <span style="color:#ae81ff">1</span>)})
+<span style="color:#75715e"># for each element of tau, total up the number of times when that element is the largest</span>
+results[<span style="color:#e6db74">&#39;max&#39;</span>]<span style="color:#f92672">.</span>value_counts()<span style="color:#f92672">/</span><span style="color:#ae81ff">2000</span>
+</code></pre></div><pre><code>3    0.6285
+2    0.1850
+1    0.1110
+0    0.0325
+5    0.0255
+4    0.0175
+Name: max, dtype: float64
+</code></pre>
+<p>Voila!  We see that our model estimates treatment arm 3 (the actual best arm) as being the best with 62.6% probability.  Of course, we cheated a little by using a data generating model that was the same as our estimation model.</p>
+<p>The goal of this post was to provide an example in which Bayesian analysis can answer a question that the client might have that frequentist analysis can&rsquo;t.  In future posts, I hope to show some other ways that Bayesian analysis might be useful for our work.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">
+</code></pre></div>
+      
+      <div class="related">
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+    <script src="/js/copycode.js"></script>
+
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+  
+    <div id="show_comments"><a id="load_comments" class="button is-link">Load comments</a></div>
+  
+    <script type="text/javascript">
+      var disqus_shortname = 'shortname';
+      function disqus() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+  
+      
+      var hash = window.location.hash.substr(1);
+      if ((hash.length > 8) && (hash.substring(0, 8) === "comment-")) {
+        disqus();
+        document.getElementById("show_comments").style.display = "none";
+      } else {
+        document.getElementById('load_comments').onclick = function() {
+          disqus();
+          document.getElementById("show_comments").style.display = "none";
+        };
+      }
+  
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/dougj892">Doug Johnson</a> 2020. Site design by <a href="https://github.com/ribic">Emir Ribic</p>
+    
+      <p>Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/ribice/kiss">Kiss</a>.</p>
+    
+  </div>
+</section>
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="\/\/matomo.example.com\/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript>
+  <img src="//matomo.example.com/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
+</noscript>
+
+<script>
+    (function(f, a, t, h, o, m){
+        a[h]=a[h]||function(){
+            (a[h].q=a[h].q||[]).push(arguments)
+        };
+        o=f.createElement('script'),
+        m=f.getElementsByTagName('script')[0];
+        o.async=1; o.src=t; o.id='fathom-script';
+        m.parentNode.insertBefore(o,m)
+    })(document, window, '\/\/fathom.example.com\/tracker.js', 'fathom');
+    fathom('trackPageview');
+</script>
+</body>
+
+
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    
+</html>
+
+

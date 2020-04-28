@@ -6,99 +6,63 @@
     <description>Recent content in Tags on Doug Johnson&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020</copyright>
-    <lastBuildDate>Mon, 20 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020. Site design by &lt;a href=&#34;https://github.com/ribic&#34;&gt;Emir Ribic</copyright>
+    <lastBuildDate>Tue, 28 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>bayes</title>
+      <title>Bayes</title>
       <link>/tags/bayes/</link>
-      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
       
       <guid>/tags/bayes/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>plot</title>
-      <link>/tags/plot/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <title>Power calculations</title>
+      <link>/tags/power-calculations/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/tags/plot/</guid>
+      <guid>/tags/power-calculations/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>R Markdown</title>
-      <link>/tags/r-markdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <title>Sampling</title>
+      <link>/tags/sampling/</link>
+      <pubDate>Wed, 04 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/r-markdown/</guid>
+      <guid>/tags/sampling/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>regression</title>
-      <link>/tags/regression/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <title>Econometrics</title>
+      <link>/tags/econometrics/</link>
+      <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>/tags/regression/</guid>
+      <guid>/tags/econometrics/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>development</title>
-      <link>/tags/development/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Scraping</title>
+      <link>/tags/scraping/</link>
+      <pubDate>Wed, 31 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>/tags/development/</guid>
+      <guid>/tags/scraping/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>go</title>
-      <link>/tags/go/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Impact evaluations</title>
+      <link>/tags/impact-evaluations/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/tags/go/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>golang</title>
-      <link>/tags/golang/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hugo</title>
-      <link>/tags/hugo/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>templates</title>
-      <link>/tags/templates/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/templates/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>themes</title>
-      <link>/tags/themes/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/themes/</guid>
+      <guid>/tags/impact-evaluations/</guid>
       <description></description>
     </item>
     

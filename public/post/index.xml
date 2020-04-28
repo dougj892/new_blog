@@ -6,90 +6,75 @@
     <description>Recent content in Posts on Doug Johnson&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020</copyright>
-    <lastBuildDate>Tue, 21 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020. Site design by &lt;a href=&#34;https://github.com/ribic&#34;&gt;Emir Ribic</copyright>
+    <lastBuildDate>Tue, 28 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Yet another post</title>
-      <link>/post/yet-another-post/</link>
-      <pubDate>Tue, 21 Apr 2020 00:00:00 +0000</pubDate>
+      <title>An Alternative Approach to Power Calculations</title>
+      <link>/post/an-alternative-approach-to-power-calculations/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/yet-another-post/</guid>
-      <description>blah blah
-Indonesia has shifted its anti-poverty strategy, gradually moving from subsidising basic commodities to targeted assistance programs for the poor. Today&amp;#39;s blog shares key learnings from randomised evaluations on the impact of anti-poverty programs. https://t.co/2FLnKF7IUo
-&amp;mdash; devpolicy.org (@devpolicy) April 21, 2020  </description>
+      <guid>/post/an-alternative-approach-to-power-calculations/</guid>
+      <description>The typical approach to power calculations goes something like this: first, the evaluator estimates the smallest MDE for which the intervention would be cost-effective. Second, the evaluator calculates the sample required to detect that MDE. Third, the evaluator throws out the calculations from step two after realizing the evaluation would be way too expensive and instead estimates the MDE she can detect given her budget constraints.The problem with this approach is that it doesn’t take into account the cost of the evaluation itself.</description>
     </item>
     
     <item>
-      <title>Test post</title>
-      <link>/post/test-post/</link>
-      <pubDate>Mon, 20 Apr 2020 00:00:00 +0000</pubDate>
+      <title>Three Stage Sampling</title>
+      <link>/post/3-stage/</link>
+      <pubDate>Wed, 04 Oct 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/test-post/</guid>
-      <description>This is a test post using R markdown.
-\[ \sigma^2 = \sum x \]
-ggplot(diamonds, aes(carat, price)) + geom_point()Testing a tweet snippet.
-Indonesia has shifted its anti-poverty strategy, gradually moving from subsidising basic commodities to targeted assistance programs for the poor. Today&amp;#39;s blog shares key learnings from randomised evaluations on the impact of anti-poverty programs. https://t.co/2FLnKF7IUo
-&amp;mdash; devpolicy.org (@devpolicy) April 21, 2020  </description>
+      <guid>/post/3-stage/</guid>
+      <description>Caveat emptor: This blog post has not been thoroughly checked for errors.
+One of IDinsight&amp;rsquo;s project teams is in the process of designing the sampling strategy for a large scale household survey and is considering using a three stage sampling design in which they would first select districts, then villages (or urban wards), and then households. In addition, someone was asking about three stage clustering for an RCT somewhere on Slack (I can&amp;rsquo;t seem to find the slack post now) so I thought it might be useful to write a short post on three stage designs.</description>
     </item>
     
     <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
+      <title>Simple Random Sampling vs. PPS Sampling</title>
+      <link>/post/srs-v-pps/</link>
+      <pubDate>Fri, 21 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>/post/srs-v-pps/</guid>
+      <description>A question came up on one of our evaluations on whether we should use simple random sampling (SRS) or probability proportional to size (PPS) sampling when selecting villages (our primary sampling units) for a matching study. Under SRS, you randomly select primary sampling units (PSUs) until you reach your desired sample size. With PPS sampling, you select your PSUs using some measure of size. PPS is often used in a first stage of a two-stage sampling design because if you use PPS to select PSUs and then select a fixed number of units (households in our case) per PSU in the second stage of sampling, the probability of selection will be identical for all units.</description>
     </item>
     
     <item>
-      <title>Creating a New Theme</title>
-      <link>/post/creating-a-new-theme/</link>
-      <pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate>
+      <title>Fixed Effects vs Difference-in-Differences</title>
+      <link>/post/fe-did/</link>
+      <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
       
-      <guid>/post/creating-a-new-theme/</guid>
-      <description>Introduction This tutorial will show you how to create a simple theme in Hugo. I assume that you are familiar with HTML, the bash command line, and that you are comfortable using Markdown to format content. I&amp;rsquo;ll explain how Hugo uses templates and how you can organize your templates to create a theme. I won&amp;rsquo;t cover using CSS to style your theme.
-We&amp;rsquo;ll start with creating a new site with a very basic template.</description>
+      <guid>/post/fe-did/</guid>
+      <description>TL;DR: When you have longitudinal data, you should use fixed effects or ANCOVA rather than difference-in-differences since a difference-in-difference specification will spit out incorrect variance estimates. If the data is from a randomized trial, ANCOVA is probably a better bet.
+Trying to understand when to use fixed effects and when to use difference-in-differences (DiD), in the past, always made me feel like an idiot. It seemed like I was missing something really obvious that everyone else was getting.</description>
     </item>
     
     <item>
-      <title>(Hu)go Template Primer</title>
-      <link>/post/goisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Web Scraping 101</title>
+      <link>/post/web-scraping/</link>
+      <pubDate>Wed, 31 Aug 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/goisforlovers/</guid>
-      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This document is a brief primer on using go templates.</description>
+      <guid>/post/web-scraping/</guid>
+      <description>More and more organizations are publishing their data on the web. This is great, but often websites don’t offer an option to download a clean and complete dataset from the site. In this situation, you have two options. First, you (or some unlucky intern) can hunker down and spend a week wearing out the ‘c’ and ‘v’ keys on your keyboard as you cut and paste ad nauseam from the website to an Excel spreadsheet.</description>
     </item>
     
     <item>
-      <title>Getting Started with Hugo</title>
-      <link>/post/hugoisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      <title>Multiple Hypothesis Testing</title>
+      <link>/post/mult-hypothesis/</link>
+      <pubDate>Mon, 04 Jul 2016 00:00:00 +0000</pubDate>
       
-      <guid>/post/hugoisforlovers/</guid>
-      <description>Step 1. Install Hugo Goto hugo releases and download the appropriate version for your os and architecture.
-Save it somewhere specific as we will be using it in the next step.
-More complete instructions are available at installing hugo
-Step 2. Build the Docs Hugo has its own example site which happens to also be the documentation site you are reading right now.
-Follow the following steps:
- Clone the hugo repository Go into the repo Run hugo in server mode and build the docs Open your browser to http://localhost:1313  Corresponding pseudo commands:</description>
+      <guid>/post/mult-hypothesis/</guid>
+      <description>layout: post title: &amp;ldquo;Multiple Hypothesis Testing&amp;rdquo; date: 2016-07-04 10:40:48 -0400 categories: jekyll update This week, I volunteered to read and summarize one of the articles for IDinsigh&amp;rsquo;s tech team&amp;rsquo;s book club. The topic for this week is multiple hypothesis testing and the article I volunteered to summarize is &amp;ldquo;Multiple Inference and Gender Differences in the Effects of Early Intervention: A Reevaluation of the Abecedarian, Perry Preschool, and Early Training Projects&amp;rdquo; by Michael Anderson.</description>
     </item>
     
     <item>
-      <title>Migrate to Hugo from Jekyll</title>
-      <link>/post/migrate-from-jekyll/</link>
-      <pubDate>Mon, 10 Mar 2014 00:00:00 +0000</pubDate>
+      <title>Response to Blattman&#39;s Post on Why What Works Is The Wrong Question</title>
+      <link>/post/blattman/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/post/migrate-from-jekyll/</guid>
-      <description>Move static content to static Jekyll has a rule that any directory not starting with _ will be copied as-is to the _site output. Hugo keeps all static content under static. You should therefore move it all there. With Jekyll, something that looked like
-▾ &amp;lt;root&amp;gt;/▾ images/logo.png should become
-▾ &amp;lt;root&amp;gt;/▾ static/▾ images/logo.png Additionally, you&amp;rsquo;ll want any files that should reside at the root (such as CNAME) to be moved to static.</description>
+      <guid>/post/blattman/</guid>
+      <description>Last week, Chris Blattman published a long blog post titled “Why ‘what works?’ is the wrong question: evaluating ideas not programs.” In the blog post, which was adapted from a talk he gave at DFID, Blattman argues that a) impact evaluations should focus on deeper, theory-driven questions rather than just whether a program works or not and b) researchers should design impact evaluations to allow for generalizability by paying attention to context and running multiple evaluations in multiple contexts.</description>
     </item>
     
   </channel>

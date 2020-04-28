@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Econometrics on Doug Johnson&#39;s website</title>
+    <link>/tags/econometrics/</link>
+    <description>Recent content in Econometrics on Doug Johnson&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020. Site design by &lt;a href=&#34;https://github.com/ribic&#34;&gt;Emir Ribic</copyright>
+    <lastBuildDate>Wed, 15 Feb 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/econometrics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Fixed Effects vs Difference-in-Differences</title>
+      <link>/post/fe-did/</link>
+      <pubDate>Wed, 15 Feb 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/fe-did/</guid>
+      <description>TL;DR: When you have longitudinal data, you should use fixed effects or ANCOVA rather than difference-in-differences since a difference-in-difference specification will spit out incorrect variance estimates. If the data is from a randomized trial, ANCOVA is probably a better bet.
+Trying to understand when to use fixed effects and when to use difference-in-differences (DiD), in the past, always made me feel like an idiot. It seemed like I was missing something really obvious that everyone else was getting.</description>
+    </item>
+    
+    <item>
+      <title>Multiple Hypothesis Testing</title>
+      <link>/post/mult-hypothesis/</link>
+      <pubDate>Mon, 04 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/mult-hypothesis/</guid>
+      <description>layout: post title: &amp;ldquo;Multiple Hypothesis Testing&amp;rdquo; date: 2016-07-04 10:40:48 -0400 categories: jekyll update This week, I volunteered to read and summarize one of the articles for IDinsigh&amp;rsquo;s tech team&amp;rsquo;s book club. The topic for this week is multiple hypothesis testing and the article I volunteered to summarize is &amp;ldquo;Multiple Inference and Gender Differences in the Effects of Early Intervention: A Reevaluation of the Abecedarian, Perry Preschool, and Early Training Projects&amp;rdquo; by Michael Anderson.</description>
+    </item>
+    
+  </channel>
+</rss>

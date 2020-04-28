@@ -2,7 +2,7 @@ baseurl = "/"
 languageCode = "en"
 title = "Doug Johnson's website"
 theme = "kiss"
-copyright = "&copy; <a href=\"https://github.com/dougj892\">Doug Johnson</a> 2020"
+copyright = "&copy; <a href=\"https://github.com/dougj892\">Doug Johnson</a> 2020. Site design by <a href=\"https://github.com/ribic\">Emir Ribic"
 disqusShortname = "shortname"
 googleAnalytics = ""
 Paginate = 5 # Number of posts per page
@@ -40,6 +40,7 @@ pageID = ""
 page = "" # Twitter Page username. If not set, params.social.twitter will be used.
 
 [params.social]
+about = "about"
 twitter = "dougj8921"
 github = "dougj892"
 email = "dougj892@gmail.com"
@@ -50,7 +51,7 @@ codepen = ""
 rss = "index.xml" # Add this to show RSS button in social.
 
 [params.social.config]
-platforms = ["github","twitter","instagram","email","linkedin"]
+platforms = ["about", "github","twitter","instagram","email","linkedin"]
 
 [params.matomoAnalytics]
 siteID = 1
