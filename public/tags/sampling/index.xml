@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020. Site design by &lt;a href=&#34;https://github.com/ribic&#34;&gt;Emir Ribic</copyright>
-    <lastBuildDate>Wed, 04 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/sampling/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Calculating Covid Prevalence from Antibody Tests</title>
+      <link>/post/calculating-covid-prevalence-from-antibody-tests/</link>
+      <pubDate>Tue, 28 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/calculating-covid-prevalence-from-antibody-tests/</guid>
+      <description>A group of Stanford researchers recently published two studies which estimated the prevalence of covid in two counties of California using antibody tests. The studies faced a lot of criticism by stats folks around the web.
+The criticism appears well deserved but in all of the criticism, I didn’t come across much in the way of clear advice on how they could account for potential diagnostic test errors better. (The post by Andrew Gelman linked to above has a lot of useful advice on other aspects of the study but was a little quiet on this subject.</description>
+    </item>
     
     <item>
       <title>Three Stage Sampling</title>
