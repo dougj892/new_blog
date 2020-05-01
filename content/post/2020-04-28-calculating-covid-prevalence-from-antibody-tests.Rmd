@@ -4,6 +4,7 @@ author: ''
 date: '2020-04-28'
 slug: calculating-covid-prevalence-from-antibody-tests
 categories: []
+draft: true
 tags:
   - Sampling
 ---
