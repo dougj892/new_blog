@@ -19,6 +19,8 @@ Several recent studies have used data from antibody tests performed on a conveni
 
 Addressing either of these challenges on their own is relatively straightforward to do using existing tools.  The R package "epiR" allows users to estimate true prevalence and confidence intervals for prevalence using the method developed by Rogan and Gladen (1978) and Reiczigel et al (2010). (See the function "epi.prev" in this package.) Similarly, the R page "survey" (and the Stata "svy: " commands) allow users to generate inference from convenience samples using post-stratification. 
 
+In this blog post, I look at two different ways of taking into account both test imperfections and the non-random nature of the sample: a simple approach which combines poststratification with a Rogan-Gladen adjustment and a Bayesian approach based on multi-level regression and poststratification. I also report results from a quick Monte Carlo expirement I used to assess both approaches.  If you just want to get some starter code to estimate seroprevalance, skip to the bottom.
+
 ## The naive approach: simple poststratification and adjustment
 One option is to combine these approaches.  In other words, we first calculate $\hat{pa}$, our estimate of the overall "apparent" seroprevalence rate (i.e. the rate not taking into account test imperfection) using the typical poststratification formula and then calculate our estimate of the true seroprevalence, $\hat{pt}$ by using the adjustment from Rogan and Gladen approach. 
 
@@ -45,7 +47,9 @@ Theoretically, we should be able to improve on this approach by more carefully t
 
 
 ### Quick overview of MRP
-One way to do this is using a fully Bayesian approach built on multi-level regression and post-stratification (MRP). MRP is an approach to small area estimation in which the analyst first estimates the mean of each strata using a multi-level model and then weights up these estimates using the poststratification weights. For example, to estimate the overall proportion $\theta$ in a population using data $y_i$ for each individual, you might use a simple model as follows to first estimate, $\theta_j$, the proportion in each stratum j using stratum variables $X_j$.
+One way to do this is using a fully Bayesian approach built on multi-level regression and post-stratification (MRP). (For another Bayesian approach to this problem which doesn't use MRP, see [Larremore et al (2020)](https://www.medrxiv.org/content/10.1101/2020.04.15.20067066v1).)
+
+MRP is an approach to small area estimation in which the analyst first estimates the mean of each strata using a multi-level model and then weights up these estimates using the poststratification weights. For example, to estimate the overall proportion $\theta$ in a population using data $y_i$ for each individual, you might use a simple model as follows to first estimate, $\theta_j$, the proportion in each stratum j using stratum variables $X_j$.
 
 $$ \theta_j =logit^{-1}(X_j\beta); \beta\sim MVN(0,\sigma I); y_i \sim bernoulli(\theta_{j[i]}) $$
 To derive your estimates of the total population, you just weight up. i.e. you calculate

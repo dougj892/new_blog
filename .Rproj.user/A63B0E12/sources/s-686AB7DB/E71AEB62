@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1055059694",
+    "hash" : "0",
     "id" : "E71AEB62",
-    "lastKnownWriteTime" : 1589274507,
-    "last_content_update" : 1589274507712,
+    "lastKnownWriteTime" : 1589276535,
+    "last_content_update" : 1589276535,
     "path" : "~/code/new_blog/content/post/2020-05-06-estimating-seroprevalence-with-data-from-an-imperfect-test-on-a-convenience-sample.Rmd",
     "project_path" : "content/post/2020-05-06-estimating-seroprevalence-with-data-from-an-imperfect-test-on-a-convenience-sample.Rmd",
     "properties" : {
-        "cursorPosition" : "69,624",
-        "scrollLine" : "61"
+        "cursorPosition" : "69,40",
+        "scrollLine" : "57"
     },
     "read_only" : false,
     "read_only_alternatives" : [
