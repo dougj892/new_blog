@@ -67,7 +67,7 @@ For a complete Bayesian model, we also need to add priors for sensitivity and sp
 
 Theory is all well and good, but how do the two approaches compare when using data? To test this, I ran a simple Monte Carlo simulation using code borrowed from Kennedy and Gabry's [MRP tutorial](https://cran.r-project.org/web/packages/rstanarm/vignettes/mrp.html).  (And big thanks to them for letting me copy their code!)
 
-The results are...not great.  Surprisingly, the naive approach actually did slightly better (meaured in terms of average absolute deviation from the true seroprevalence) when it came to estimating overall seroprevalence. This is especially surprising since the data generating process used for the simulations is almost identical to my MRP model. The modified MRP process does much better when estimating subgroups (the Rogan and Gladen estimates for subgruops are often negative, which happens sometimes) but this is a small consolation and, in my view, not worth the significant hassle of generating all this additional code.
+Surprisingly, the naive approach actually did slightly better (in terms of average absolute deviation from the true seroprevalence) when it came to estimating overall seroprevalence. This is especially surprising since the data generating process used for the simulations is almost identical to my MRP model. The modified MRP process does much better when estimating subgroups (the Rogan and Gladen estimates for subgruops are often negative, which happens sometimes) but clearly, given the additional hassle of generating the code, the modified MRP approach is only worth it if you really want to estimate subgroup effects.
 
 
 ## For people interested in using this code
