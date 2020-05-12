@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020. Site design by &lt;a href=&#34;https://github.com/ribic&#34;&gt;Emir Ribic</copyright>
-    <lastBuildDate>Tue, 28 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 06 May 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Estimating seroprevalence with data from an imperfect test on a convenience sample</title>
+      <link>/post/estimating-seroprevalence-with-data-from-an-imperfect-test-on-a-convenience-sample/</link>
+      <pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/estimating-seroprevalence-with-data-from-an-imperfect-test-on-a-convenience-sample/</guid>
+      <description>Several recent studies have used data from antibody tests performed on a convenience sample to estimate seroprevalence of covid 19 in a population. Estimating seroprevalence from this data presents two challenges. First, the analyst must take steps, through weighting or other measures, to deal with likely sample selection bias. Second, the analyst must take into account imperfections in the test itself.
+Addressing either of these challenges on their own is relatively straightforward to do using existing tools.</description>
+    </item>
     
     <item>
       <title>An Alternative Approach to Power Calculations</title>

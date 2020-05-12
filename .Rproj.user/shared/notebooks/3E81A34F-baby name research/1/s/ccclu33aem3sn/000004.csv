@@ -1,0 +1,4 @@
+"0","temp <- babynames %>%"
+"0","  filter(((name == ""Elizabeth"") & (sex == ""F"")) | ((name == ""Douglas"") & (sex == ""M"")) | ((name == ""Mara"") & (sex == ""F""))) "
+"0",""
+"0","ggplot(temp, aes(x = year, y = n, color = name)) + geom_line()"

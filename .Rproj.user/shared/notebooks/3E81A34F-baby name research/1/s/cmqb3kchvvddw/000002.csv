@@ -1,0 +1,6 @@
+"0","babynames %>%"
+"0","  group_by(sex, name) %>%"
+"0","  summarize(sum(n)) %>%"
+"0","  top_n(1)"
+"2","Selecting by sum(n)
+"

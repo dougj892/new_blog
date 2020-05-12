@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title>Estimating seroprevalence with data from an imperfect test on a convenience sample | Doug Johnson&#39;s website</title>
+
+<meta property='og:title' content='Estimating seroprevalence with data from an imperfect test on a convenience sample - Doug Johnson&#39;s website'>
+<meta property='og:description' content='Several recent studies have used data from antibody tests performed on a convenience sample to estimate seroprevalence of covid 19 in a population. Estimating seroprevalence from this data presents two challenges. First, the analyst must take steps, through weighting or other measures, to deal with likely sample selection bias. Second, the analyst must take into account imperfections in the test itself.
+Addressing either of these challenges on their own is relatively straightforward to do using existing tools.'>
+<meta property='og:url' content='/post/estimating-seroprevalence-with-data-from-an-imperfect-test-on-a-convenience-sample/'>
+<meta property='og:site_name' content='Doug Johnson&#39;s website'>
+<meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/9f47a5820df24e7aae1e744e9b53bc38?s=256'><meta property='article:section' content='Post'><meta property='article:tag' content='Bayes'><meta property='article:tag' content='Sampling'><meta property='article:published_time' content='2020-05-06T00:00:00Z'/><meta property='article:modified_time' content='2020-05-06T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@dougj8921'><meta name='twitter:creator' content='@dougj8921'>
+
+
+<link href="/index.xml" rel="alternate" type="application/rss+xml" title="Doug Johnson&#39;s website" />
+
+<link rel="stylesheet" href="/css/style.css"/><link rel='stylesheet' href='/css/custom.css'><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="canonical" href="/post/estimating-seroprevalence-with-data-from-an-imperfect-test-on-a-convenience-sample/">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="theme-color" content="#ffffff">
+</head>
+<body>
+<section class="section">
+  <div class="container">
+    <nav id="nav-main" class="nav">
+      <div id="nav-name" class="nav-left">
+        <a id="nav-anchor" class="nav-item" href="/">
+          <h1 id="nav-heading" class="title is-4">Doug Johnson&#39;s website</h1>
+        </a>
+      </div>
+      <div class="nav-right">
+        <nav id="nav-items" class="nav-item level is-mobile"><a class="level-item" aria-label="about" href='/about'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="8"></line>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="github" href='https://github.com/dougj892'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="twitter" href='https://twitter.com/dougj8921'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="email" href='mailto:dougj892@gmail.com'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+    <polyline points="22,6 12,13 2,6"/>
+    
+  </svg></i>
+            </span>
+          </a><a class="level-item" aria-label="linkedin" href='https://linkedin.com/in/doug-johnson-15a1993'
+            target='_blank' rel='noopener'>
+            <span class="icon">
+              <i class><svg viewbox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' aria-hidden='true'>
+    
+    <path stroke-width="1.8" d="m5.839218,4.101561c0,1.211972 -0.974141,2.194011 -2.176459,2.194011s-2.176459,-0.982039 -2.176459,-2.194011c0,-1.211094 0.974141,-2.194011 2.176459,-2.194011s2.176459,0.982917 2.176459,2.194011zm0.017552,3.94922l-4.388022,0l0,14.04167l4.388022,0l0,-14.04167zm7.005038,0l-4.359939,0l0,14.04167l4.360816,0l0,-7.370999c0,-4.098413 5.291077,-4.433657 5.291077,0l0,7.370999l4.377491,0l0,-8.89101c0,-6.915523 -7.829986,-6.66365 -9.669445,-3.259423l0,-1.891237z"/>
+    
+  </svg></i>
+            </span>
+          </a></nav>
+      </div>
+    </nav>
+
+    <nav class="nav">
+      
+
+      
+    </nav>
+
+  </div>
+  <script src="/js/navicon-shift.js"></script>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="subtitle tags is-6 is-pulled-right">
+      
+      
+<a class="subtitle is-6" href="/tags/bayes/">#Bayes</a>
+
+
+
+  
+  | <a class="subtitle is-6" href="/tags/sampling/">#Sampling</a>
+  
+
+
+      
+    </div>
+    <h2 class="subtitle is-6">May 6, 2020</h2>
+    <h1 class="title">Estimating seroprevalence with data from an imperfect test on a convenience sample</h1>
+    
+    <div class="content">
+      
+
+
+<p>Several recent studies have used data from antibody tests performed on a convenience sample to estimate seroprevalence of covid 19 in a population. Estimating seroprevalence from this data presents two challenges. First, the analyst must take steps, through weighting or other measures, to deal with likely sample selection bias. Second, the analyst must take into account imperfections in the test itself.</p>
+<p>Addressing either of these challenges on their own is relatively straightforward to do using existing tools. The R package “epiR” allows users to estimate true prevalence and confidence intervals for prevalence using the method developed by Rogan and Gladen (1978) and Reiczigel et al (2010). (See the function “epi.prev” in this package.) Similarly, the R page “survey” (and the Stata “svy:” commands) allow users to generate inference from convenience samples using post-stratification.</p>
+<div id="the-naive-approach-simple-poststratification-and-adjustment" class="section level2">
+<h2>The naive approach: simple poststratification and adjustment</h2>
+<p>One option is to combine these approaches. In other words, we first calculate <span class="math inline">\(\hat{pa}\)</span>, our estimate of the overall “apparent” seroprevalence rate (i.e. the rate not taking into account test imperfection) using the typical poststratification formula and then calculate our estimate of the true seroprevalence, <span class="math inline">\(\hat{pt}\)</span> by using the adjustment from Rogan and Gladen approach.</p>
+<p><span class="math display">\[ \widehat{pa} = \sum_{h=1}^H{\frac{N_h*\bar{y_h}}{N}} \]</span>
+Where h indexes strata, <span class="math inline">\(N_h\)</span> is the number of people in the total population in stratum h, N is the total number of people in the population and <span class="math inline">\(\bar{y_h}\)</span> is the sample mean within stratum h.</p>
+<p>We then calculate true seroprevalence by adjusting this figure using the formula below:</p>
+<p><span class="math display">\[ \widehat{pt} = \frac{\widehat{pa}+sp-1}{se+sp-1} \]</span>
+Where se and sp are our estimates for the sensitivity and specificity of the test respectively.</p>
+<p>There are several options for calculating standard errors, but the simplest approach is to use a quick formula for the standard error of a proportion</p>
+<p><span class="math display">\[ \widehat{Var({\widehat{pt}})}= \frac{\widehat{pa}(1-\widehat{pa})}{N(se+sp-1)^2}\]</span>
+If you want to be more exact and take into account the uncertainty in the estimates of se and sp, you can use the more complicated formula from Rogan and Gladen which uses the Taylor Linearization approach.</p>
+</div>
+<div id="issues-with-the-naive-approach" class="section level2">
+<h2>Issues with the naive approach</h2>
+<p>In theory, the naive approach shouldn’t work too well. To see why this is the case, suppose you have two strata of equal sample size but one stratum represents a much larger portion of the poulation than the other strata (i.e. if you were to use weights, the weights for observations from this stratum would be much higher than observations from other strata). Suppose also that true prevalence is very low. Due to random test error, you will likely have some false positives in your sample. If you happen to get a false positive in the stratum with high weights, then the naive approach will lead you to overestimate the overall true prevalence. On average, your estimate of the true prevalence will be Ok but it (in theory) will have pretty high variance. (I caveat these claims with the phrase “in theory” since, as we will see below, for the simulated data I create it isn’t actually that much of a problem.)</p>
+</div>
+<div id="a-bayesian-approach-using-modified-mrp" class="section level2">
+<h2>A Bayesian Approach using Modified MRP</h2>
+<p>Theoretically, we should be able to improve on this approach by more carefully taking into account potential test imperfections. To use the example from above, if we saw that there was one positive test in the highly weighted stratum and 0 positive tests in the other stratum, we should adjust downward our overall estimate of the prevalence.</p>
+<div id="quick-overview-of-mrp" class="section level3">
+<h3>Quick overview of MRP</h3>
+<p>One way to do this is using a fully Bayesian approach built on multi-level regression and post-stratification (MRP). MRP is an approach to small area estimation in which the analyst first estimates the mean of each strata using a multi-level model and then weights up these estimates using the poststratification weights. For example, to estimate the overall proportion <span class="math inline">\(\theta\)</span> in a population using data <span class="math inline">\(y_i\)</span> for each individual, you might use a simple model as follows to first estimate, <span class="math inline">\(\theta_j\)</span>, the proportion in each stratum j using stratum variables <span class="math inline">\(X_j\)</span>.</p>
+<p><span class="math display">\[ \theta_j =logit^{-1}(X_j\beta); \beta\sim MVN(0,\sigma I); y_i \sim bernoulli(\theta_{j[i]}) \]</span>
+To derive your estimates of the total population, you just weight up. i.e. you calculate</p>
+<p><span class="math display">\[ \widehat{\theta} = \sum_{h=1}^H{\frac{N_h*\widehat{\theta_j}}{N}} \]</span></p>
+<p>MRP is especially useful when you have a lot of different strata (which is often the case) since it allows you to more effectively “borrow strength” between strata compared to the approach where you simply model a different intercept for each stratum. (If you are simply modeling a separate intercept for each stratum, then there is no way for the model to know, for example, that a stratum for white men between 41 and 45 in Georgia and a stratum for white men between 46 and 50 are likely to be similar.) It is also, believe it or not, relatively straightforward compared to other approaches to small area estimate. For a more thorough overview of MRP, I highly recommend this <a href="https://mc-stan.org/rstanarm/articles/mrp.html">vignette</a>.</p>
+</div>
+<div id="modified-mrp-to-account-for-test-imperfections" class="section level3">
+<h3>Modified MRP to account for test imperfections</h3>
+<p>If implementing MRP using a Bayesian approach, it is fairly straightforward to modify the MRP model to take into account test error. As before, we use a multilevel model for the likelihood of the true prevalence. But in our likelihood of the test data, we use the apparent prevalence rate, which is the probability of a test being positive taking into account both prevalence and test imperfections, rather than the true prevalence. Lastly, we also model uncertainty in our estimates of the sensitivity and specificity using data on the number of true positives (tp), true negatives (tn), false positives (fp), and false negatives (fn) from a validation study of the antibody test.</p>
+<p><span class="math display">\[ pt_j =logit^{-1}(X_j\beta); \beta\sim MVN(0,\sigma I)\]</span>
+<span class="math display">\[ pa_j = se*pt_j+(1-sp)*(1-pt_j) \]</span>
+<span class="math display">\[ se \sim binom(tp, tp+fn); sp \sim binom(tn, tn+fp)\]</span>
+<span class="math display">\[ y_i \sim bern(pa_{j[i]}) \]</span>
+For a complete Bayesian model, we also need to add priors for sensitivity and specificity.</p>
+</div>
+</div>
+<div id="results-from-a-monte-carlo-simulation" class="section level2">
+<h2>Results from a Monte Carlo Simulation</h2>
+<p>Theory is all well and good, but how do the two approaches compare when using data? To test this, I ran a simple Monte Carlo simulation using code borrowed from Kennedy and Gabry’s <a href="https://cran.r-project.org/web/packages/rstanarm/vignettes/mrp.html">MRP tutorial</a>. (And big thanks to them for letting me copy their code!)</p>
+<p>The results are…not great. Surprisingly, the naive approach actually did slightly better (meaured in terms of average absolute deviation from the true seroprevalence) when it came to estimating overall seroprevalence. This is especially surprising since the data generating process used for the simulations is almost identical to my MRP model. The modified MRP process does much better when estimating subgroups (the Rogan and Gladen estimates for subgruops are often negative, which happens sometimes) but this is a small consolation and, in my view, not worth the significant hassle of generating all this additional code.</p>
+</div>
+<div id="for-people-interested-in-using-this-code" class="section level2">
+<h2>For people interested in using this code</h2>
+<p>All code for this analysis can be found <a href="https://github.com/dougj892/sero_prevalence2">here</a>.
+If you looking to copy and adapt the code, start with the R notebook “Estimate seroprevalence” in the above repo. In that notebook, I fit the modified MRP approach in two different ways: using raw Stan code and using the brms package (with some custom code to extend the package). If you would like to use the more complicated modified MRP approach, I strongly recommend you use the brms package. If you use the brms package, you should be able to copy and paste the code I created to define a “custom family” for the brms package and then modify the code in the main call to brm to suite your data. Since brms uses the lme4 syntax for defining multi-level models, customizing this code hopefully shouldn’t be too hard. By contrast, I find that modifying raw Stan code always takes quite a bit of time.</p>
+</div>
+
+      
+      <div class="related">
+
+<h3>Similar articles:</h3>
+<ul>
+	
+	<li><a href="/post/an-alternative-approach-to-power-calculations/">An Alternative Approach to Power Calculations</a></li>
+	
+	<li><a href="/post/calculating-covid-prevalence-from-antibody-tests/">Calculating Covid Prevalence from Antibody Tests</a></li>
+	
+	<li><a href="/post/3-stage/">Three Stage Sampling</a></li>
+	
+	<li><a href="/post/srs-v-pps/">Simple Random Sampling vs. PPS Sampling</a></li>
+	
+</ul>
+</div>
+      
+    </div>
+    
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <aside><div id="disqus_thread"></div></aside>
+  
+    <div id="show_comments"><a id="load_comments" class="button is-link">Load comments</a></div>
+  
+    <script type="text/javascript">
+      var disqus_shortname = 'shortname';
+      function disqus() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+      }
+  
+      
+      var hash = window.location.hash.substr(1);
+      if ((hash.length > 8) && (hash.substring(0, 8) === "comment-")) {
+        disqus();
+        document.getElementById("show_comments").style.display = "none";
+      } else {
+        document.getElementById('load_comments').onclick = function() {
+          disqus();
+          document.getElementById("show_comments").style.display = "none";
+        };
+      }
+  
+
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/dougj892">Doug Johnson</a> 2020. Site design by <a href="https://github.com/ribic">Emir Ribic</p>
+    
+      <p>Powered by <a href="https://gohugo.io/">Hugo</a> &amp; <a href="https://github.com/ribice/kiss">Kiss</a>.</p>
+    
+  </div>
+</section>
+
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="\/\/matomo.example.com\/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', '1']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript>
+  <img src="//matomo.example.com/piwik.php?idsite=1&amp;rec=1" style="border:0" alt="" />
+</noscript>
+
+<script>
+    (function(f, a, t, h, o, m){
+        a[h]=a[h]||function(){
+            (a[h].q=a[h].q||[]).push(arguments)
+        };
+        o=f.createElement('script'),
+        m=f.getElementsByTagName('script')[0];
+        o.async=1; o.src=t; o.id='fathom-script';
+        m.parentNode.insertBefore(o,m)
+    })(document, window, '\/\/fathom.example.com\/tracker.js', 'fathom');
+    fathom('trackPageview');
+</script>
+</body>
+
+
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+    
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        // Center justify equations in code and markdown cells. Elsewhere
+        // we use CSS to left justify single line equations in code cells.
+        displayAlign: 'center',
+        "HTML-CSS": {
+            styles: {'.MathJax_Display': {"margin": 0}},
+            linebreaks: { automatic: true }
+        }
+    });
+    </script>
+    
+</html>
+
+
