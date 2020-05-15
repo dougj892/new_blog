@@ -4,7 +4,7 @@ title = "Doug Johnson's website"
 theme = "kiss"
 copyright = "&copy; <a href=\"https://github.com/dougj892\">Doug Johnson</a> 2020. Site design by <a href=\"https://github.com/ribic\">Emir Ribic"
 disqusShortname = "shortname"
-googleAnalytics = ""
+googleAnalytics = "UA-1723694-2"
 Paginate = 5 # Number of posts per page
 enableRobotsTXT = true
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
