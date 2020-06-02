@@ -16,6 +16,8 @@ Research by Kothari (summarized [here](https://www.huffpost.com/entry/what-cause
 ```{r setup, include=FALSE, message=FALSE} 
 library(tidyverse); library(Synth); library(readxl);library(gt)
 data_path <- "C:/Users/dougj/Documents/Data/Education/ASER trends over time"
+nsdp_path <- "C:/Users/dougj/Documents/Data"
+
 ```
 
 ```{r clean data, message=FALSE, include=FALSE}
@@ -25,6 +27,15 @@ aser <- read_excel(file.path(data_path, "aser_trends_manual.xlsx")) %>%
   select(year, State, state_abbr, std3_read = std3_read_std1_all, std5_read = std5_read_std2_all, std3_math  = std3_subtract_all, std5_math = std5_divis_all) %>%
   filter(year != 2018)
 
+# Get 2014 NSDP and merge in with ASER data
+nsdp <- read_excel(file.path(nsdp_path, "Indian state per capita NSDP 2014.xlsx"))
+state_names <- read_csv(file.path(nsdp_path, "India State names.csv"))
+nsdp <- nsdp %>% left_join(state_names) %>% select(state_abbr, nsdp_2014)
+
+aser <- aser %>% left_join(nsdp, by = "state_abbr")
+
+# clean up the environment
+rm(nsdp, state_names)
 ```
 
 # Descriptive statistics
@@ -86,10 +97,9 @@ states_w_na <- unique(aser$state_abbr[is.na(aser$std3_read) | is.na(aser$std5_re
 # drop these states from the dataset (they are all small and unlikely to be good matches anyway). I also drop 2006 data because for some reason that is giving me the unbalanced error
 aser <- aser %>% filter(!(state_abbr %in% states_w_na)) %>% 
   filter(year != 2006) 
-
+  
 # Create index for state 
 aser <- aser %>% group_by(state_abbr) %>% mutate(id = group_indices())
-  
 
 dataprep.out <- dataprep(foo = as.data.frame(aser),
          predictors = c("std3_read", "std5_read"),

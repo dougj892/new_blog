@@ -79,9 +79,38 @@ The figures reveal a few things. First, the jump in grade 5 reading levels in Ma
 
 My takeaway from these figures is that Kothari's argument is plausible but by no means certain. The reading gains are large but, on the other hand, the data are noisy. 
 
-# Estimating the Impact of SLS in Maharashtra Using the Synthetic Control Method
+# The Synthetic Control Method (SCM)
 
-The synthetic control method offers a more rigorous 
+The synthetic control method offers a more rigorous approach to the classic single unit case study.  Traditionally, when attempting to estimate the impact of a policy implemented in only one state or region, researchers would pick one other state or region to use as the control This is in fact what Kothari does in his article in The Huffington Post. (He uses Gujarat as the control.) This approach is obviously fraught.  States may vary significantly in their policies and trends over time and thus it is questionable whether any one state would serve as a good control for another state. 
+
+The synthetic control method seeks to create a better control for the state in which the policy or intervention has been implemented by using a weighted average of the outcomes for several other states which display similar trends in the outcome prior to the intervention and have similar covariate values. [Abadie, Diamond, and Hainmuller (2011)](https://www.tandfonline.com/doi/pdf/10.1198/jasa.2009.ap08746) show that the if this "synthetic control" matches the intervention state in terms of pre-intervention outcomes and covariates, and outcomes are determined by a factor model (see article for more details), the synthetic control will likely do a good job of predicting the outcome in the intervention state after the implementation of the intervention. 
+
+A second advantage of the synthetic control approach is that it provides a natural way to test the reliability of our estimate through the use of placebo tests. For example, we may conduct a set of placebo test by dropping the intervention state from our sample and then calculating the "effect" for each of the other states. By comparing the size of the effect for the actual intervention state with the size of the placebo effects for the other states, we may get a sense of how robust our estimate is. 
+
+[Abadie (2019)](https://economics.mit.edu/files/17847) provides an excellent overview of the method. 
+
+# Applying SCM to the case of SLS in Maharashtra
+
+I use SCM to estimate the impact of SLS on grade 5 reading levels in Maharashtra between 2014 and 2016. I start with grade 5 reading levels for two reasons.  First, based on the figures above, it seems like I am much more likely to see an impact on grade 5 reading than grade 3 reading.  Thus, if I don't find a clear effect on grade 5 reading (which I don't) it is safe to give up. Second, if I use grade 5 reading levels as the outcome I can use grade 3 reading levels from the previous round as a covariate which should increase my precision substantially. 
+
+There is now a cottage industry of synthetic control approaches. I use the original synthetic control approach as described in Abadie, Diamond, and Hainmuller due to the availability of the R Synth package to apply this approach. 
+
+To apply the synthetic control approach, we must specify a set of predictors and a set of linear combinations of the pre-intervention outcomes variables to generate the synthetic control match. For predictors, I use grade 3 reading scores in 2014 and grade 5 math scores in 2016.  (It is Ok to use "predictors" measured after the intervention as long as the intervention doesn't effect those predictors.) For linear combinations of the pre-intervention outcome variables, I use the mean from 2007 to 2014 and the mean in 2013 and 2014.  
+
+I also specify a vector which controls how much weight to assign each of these predictors in the matching process. (In most contexts, you can let the Synth package do this by figuring out which predictors best predict the outcome variable prior to the intervention.  In our case, this wouldn't work since, for example, 2016 grade 5 math scores would not do a good job of predicting 2008 grade 5 reading.) See the code for details of this vector.
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
 
 
 

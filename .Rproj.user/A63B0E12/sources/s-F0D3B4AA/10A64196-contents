@@ -1,0 +1,49 @@
+---
+title: "Estimate impact of SLS in MH"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+---
+
+In this notebook, I use synthetic controls to estimate the impact of Maharashtra's same language subtitling program on foundational literacy.
+
+Research by Kothari (summarized [here](https://www.huffpost.com/entry/what-caused-maharashtras-leap-in-reading_b_589d1277e4b0e172783a9a8f) in the Huffington Post) shows that ASER scores increased in Maharashtra around the time that MH introduced SLS into programming. ASER scores actually didn't increase for grade 8 students in Maharashtra over this period, but since I don't have data on grade 8 students going back in time I am ignoring that for now. 
+
+
+```{r setup, include=FALSE, message=FALSE} 
+library(tidyverse); library(Synth); library(readxl);library(gt)
+data_path <- "C:/Users/dougj/Documents/Data/Education/ASER trends over time"
+
+```
+
+```{r clean data, message=FALSE, include=FALSE}
+# Import the data, convert everything to numeric, and keep just the variables we'll need
+aser <- read_excel(file.path(data_path, "aser_trends_manual.xlsx")) %>% 
+  mutate_at(vars(-state_abbr, -State), as.numeric) %>% 
+  select(year, State, std3_read = std3_read_std1_all, std5_read = std5_read_std2_all, std3_math  = std3_subtract_all, std5_math = std5_divis_all) %>% 
+  filter(year != 2018)
+
+```
+
+# Descriptive analysis
+Look at first differences in reading values to get a sense of how large the increase in MH is compared to other states.  For the class 5 indicator, MH has the largest increase from 2014 to 2016 and for the class 3 indicator it has the 3rd largest increase. 
+
+```{r}
+# Create dataset of first differences
+diffs <- aser %>% filter(year >= 2012) %>% group_by(State) %>% 
+  mutate_at(vars(starts_with("std")), ~.x-lag(.x, order_by = year)) %>% 
+  filter(year != 2012) %>% 
+  pivot_wider(State, names_from = year, values_from = c("std3_read", "std5_read", "std3_math", "std5_math")) %>% 
+  ungroup()
+
+# Print MH's values
+diffs %>% filter(State == "maharashtra") %>% gt()
+
+# Get the rank of Maharashtra for one variable
+diffs %>% mutate_at(vars(-State),~min_rank(desc(.x))) %>% 
+  filter(State == "maharashtra") %>% gt()
+
+```
+
