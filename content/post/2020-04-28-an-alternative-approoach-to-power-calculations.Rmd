@@ -29,7 +29,7 @@ $$ VOI(study)=.1*5000+.9*1000-1000 = 400 $$ lives
 
 If we additionally assume that the cost per life saved is constant for the two interventions (i.e. if you spent Y on the first intervention you would save Y/1,000,000*1000 lives), we may calculate the exact amount the funder would be willing to spend on the study. Assuming constant cost per life saved, the funder would be willing to spend up to $285,714 on this study. Note that up until this point we have not used Bayes’ theorem at all – just some simple algebra.
 
-#Removing the Assumption of Perfect Accuracy
+# Removing the Assumption of Perfect Accuracy
 Unfortunately, studies are never perfectly accurate.  Suppose that if the intervention is a blockbuster there is a 95% probability that the study will say that it is a block buster. But if the intervention is a dud, there is still a 5% probability that the study will say that it is a blockbuster.  
 To calculate VOI for this new noisy study, we first calculate the probability that the study result is “blockbuster”.  This probability is .9*.05+.1*.95=.14.  Next, we need to calculate the expected utility if the study result is positive and the expected utility if the result is negative. Here’s where things get a little trickier and where Bayes’ rule comes in handy. If we get a “blockbuster” result, our post-facto estimate of the probability that the intervention is really a blockbuster would be:
 

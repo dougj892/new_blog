@@ -1,0 +1,4 @@
+"0","library(tidyverse); library(Synth); library(readxl);library(gt)"
+"0","data_path <- ""C:/Users/dougj/Documents/Data/Education/ASER trends over time"""
+"0","nsdp_path <- ""C:/Users/dougj/Documents/Data"""
+"0",""

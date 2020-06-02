@@ -1,0 +1,92 @@
+---
+title: Same language subtitling
+author: ''
+date: '2020-06-02'
+slug: same-language-subtitling
+categories: []
+tags:
+  - education
+---
+TLDR: Maybe, but we can’t say much from the data.
+
+# Summary
+
+Between 2013 and 2015, Zee Talkies, with the support of PlanetRead and USAID, added subtitles to all of the songs of many of the Marathi movies it broadcast. The organizers of the project hoped that by adding the subtitles, a strategy known as “same language subtitling,” they would get children to read along as they listened to the songs and thus improve their reading skills. 
+
+A quick analysis of ASER scores from Maharashtra during that period of time suggests that the strategy may have been successful.  In 2014, 53.5% of rural children in grade 5 could read a standard 2 level text.  In 2016, 62.6% could. There was a similar (though smaller) improvement in grade 3 reading scores.  (There was no improvement in grade 8 reading scores.) In The Huffington Post, Brij Kothari, founder of Planet Read [argues](https://www.huffpost.com/entry/what-caused-maharashtras-leap-in-reading_b_589d1277e4b0e172783a9a8f) argues that this jump in reading scores was likely caused by the SLS.
+
+I’m a big fan of same language subtitling (see the end of this post for why), but I wanted to see whether this evidence would stand up to greater scrutiny.  In this blog post, I use a larger dataset of ASER data going back to 2007 (a year after ASER started) and the synthetic control approach to more rigorously test this claim. Unfortunately, the larger dataset and more sophisticated methods show that there is little evidence to either support or reject this claim.  At the end of this blog post, I argue that even without this evidence, I believe that investing in SLS makes sense. 
+
+To get the code for this post, see here. For the ASER dataset see here. Although not visible on my website, this post was created as an R notebook with code embedded and I only use a single dataset in the entire post, so it should be fairly easy to inspect the code. 
+
+# Same Language Subtitling
+
+The idea behind SLS is pretty simple: kids naturally follow the subtitles as they listen to a video and thus pick up on spelling.  For an example of SLS, check out this video from Planet Read:
+
+![](https://www.youtube.com/watch?v=MHGSG1QmbgQ)
+
+The beauty of SLS is that the number of learners reached per dollar spent is, potentially, phenomenally high. In India, TV ownership is relatively high even among low income households.  And the costs of adding subtitles, while not negligible, are pretty modest.  (See the graph in my recent [Scroll article](https://scroll.in/article/961937/small-screen-big-impact-educational-tv-could-be-indias-next-frontier-in-remote-learning) with Rob for more data on TV ownership by socio-economic status.) Kothari estimates that adding SLS to all programming in India would cost approximately XXX.  In addition, these costs would likely come down over time as TV channels could simply demand scripts for new content. 
+
+Despite the high potential of SLS, there isn’t a lot of evidence on its impact.  Several studies which track subject’s eye movements as they watch SLS videos (including one by PlanetRead of children in Rajasthan) have found that viewers pay attention to the subtitles in SLS videos.  But few studies have looked at the impact of SLS on reading ability.  According to a [review]( https://turnonthesubtitles.org/research/) of the evidence by turnonthesubtitles (a group dedicated to SLS), the evidence from Maharashtra provides the most conclusive evidence in favour of SLS’s impact on reading.  
+
+# Basic analysis of ASER Data
+
+Before performing more sophisticated analyses, it’s useful to first explore our data.  In this, and the rest of the analyses on this page, I focus on the 4 foundational literacy and numeracy scores included in the ASER trends over time report: portion of grade 3 children who can read a grade 1 text, portion of grade 5 children who can read a grade 2 text, portion of grade 3 children who can perform subtraction, and the portion of grade 5 children who can perform division.  While individual ASER reports from each year include other indicators, I have data for these indicators going back in time. 
+
+First, let’s look at Maharashtra’s grade 5 reading scores over time. (The graph for grade 3 reading looks very similar.)
+
+```{r setup, include=FALSE, message=FALSE} 
+library(tidyverse); library(Synth)
+aser <- read_csv("https://raw.githubusercontent.com/dougj892/public-datasets/master/ASER%20trends%20over%20time.csv") %>% 
+  mutate_at(vars(-state_abbr, -State), as.numeric) %>% 
+  select(year, State, state_abbr, std3_read = std3_read_std1_all, std5_read = std5_read_std2_all, std3_math  = std3_subtract_all, std5_math = std5_divis_all) %>%
+  filter(year != 2018)
+```
+
+```{r echo =FALSE, message = FALSE}
+ggplot(subset(aser, state_abbr == "MH"), aes(x = year, y = std5_read)) + 
+  geom_line() +
+  labs(title = "Maharashtra Grade 5 Reading", y = "% rural grade 5 children can read grade 2 text")
+
+ggplot(subset(aser, state_abbr == "MH"), aes(x = year, y = std3_read)) + 
+  geom_line() +
+  labs(title = "Maharashtra Grade 3 Reading", y = "% rural grade 3 children can read grade 1 text")
+```
+Now, let's look at the changes in Maharashtra between 2014 and 2016 on all of the ASER indicators and compare these changes to changes in other states so we can get a sense of whether the changes in Maharashtra are relatively large. 
+
+```{r, echo = FALSE}
+# Create dataset of first differences
+diffs <- aser %>% filter(year >= 2012) %>% group_by(State) %>% 
+  mutate_at(vars(starts_with("std")), ~.x-lag(.x, order_by = year)) %>% 
+  filter(year != 2012) %>% 
+  ungroup()
+
+diffs_long <- diffs %>% pivot_longer(starts_with("std"), names_to = "temp", values_to = "diff") %>% 
+  mutate(class = str_sub(temp, 4,4), subject = str_extract(temp, "(math|read)"))
+
+
+# plot the reading changes for 2016
+ggplot(subset(diffs_long, year == 2016), aes(x = State, y = diff, fill=factor(ifelse(State=="maharashtra","Highlighted","Normal")))) + 
+  scale_fill_manual(name = "area", values=c("red","grey50"), guide= FALSE) +
+  geom_bar(stat = "identity")+
+  facet_grid(subject ~ class) +
+  coord_flip() +
+  labs(y = "Change from 2014 to 2016", x =element_blank(), title = "Change in ASER score 2014-2016 by state, subject and grade")
+
+```
+ 
+The figures reveal a few things. First, the jump in grade 5 reading levels in Maharashtra between 2014 and 2016 was large compared to other states.  In fact, Maharashtra experienced the largest gain in grade 5 literacy of any state. In addition, the gain in grade 5 math was much more modest. Both of these facts suggest that something caused an increase in Maharashtra's literacy levels.  On the other hand, gains in grade 3 reading were much more modest and were similar to gains in grade 3 math.  In addition, looking at reading scores over time it seems like Maharashtra may just be bouncing back from one particularly bad year.
+
+My takeaway from these figures is that Kothari's argument is plausible but by no means certain. The reading gains are large but, on the other hand, the data are noisy. 
+
+# Estimating the Impact of SLS in Maharashtra Using the Synthetic Control Method
+
+The synthetic control method offers a more rigorous 
+
+
+
+
+
+
+
+

@@ -1,9 +1,9 @@
 {
-    "path" : "~/code/new_blog",
-    "sortOrder" : [
+    "path": "~/code/new_blog/content/post",
+    "sortOrder": [
         {
-            "ascending" : true,
-            "columnIndex" : 2
+            "columnIndex": 2,
+            "ascending": true
         }
     ]
 }
