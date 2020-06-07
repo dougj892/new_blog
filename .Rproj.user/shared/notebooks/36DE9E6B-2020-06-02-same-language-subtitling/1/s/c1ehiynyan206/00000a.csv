@@ -1,0 +1,6 @@
+"0","results <- aser %>% count(state_abbr, id) %>% "
+"0","  arrange(id) %>% select(-n) %>% "
+"0","  cbind(effects) %>% rename(""effect"" =...3 )"
+"2","New names:
+* NA -> ...3
+"

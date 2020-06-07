@@ -1,0 +1,4 @@
+"0","ggplot(aser, aes(x = year, y = std5_read)) +"
+"0","  geom_line() +"
+"0","  theme(axis.text.x = element_blank())+"
+"0","  facet_wrap( ~ state_abbr, nrow = 3)"

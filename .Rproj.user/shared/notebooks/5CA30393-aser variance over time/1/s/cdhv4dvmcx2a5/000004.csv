@@ -1,0 +1,4 @@
+"0","```r
+
+write_csv(df_bar, file.path(output, paste(subject, \"- bar data.csv\")))
+```"

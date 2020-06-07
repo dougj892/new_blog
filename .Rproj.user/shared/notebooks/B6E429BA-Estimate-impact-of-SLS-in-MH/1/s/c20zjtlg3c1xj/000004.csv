@@ -1,0 +1,8 @@
+"0",""
+"0","# plot the reading changes for 2014"
+"0","ggplot(subset(diffs_long, year == 2014), aes(x = State, y = diff, fill=factor(ifelse(State==""maharashtra"",""Highlighted"",""Normal"")))) + "
+"0","  scale_fill_manual(name = ""area"", values=c(""red"",""grey50""), guide= FALSE) +"
+"0","  geom_bar(stat = ""identity"")+"
+"0","  facet_grid(subject ~ class) +"
+"0","  coord_flip() +"
+"0","  labs(y = ""Change from 2013 to 2014"", x =element_blank(), title = ""Change in ASER score 2013-2014 by state, subject and grade"")"

@@ -1,0 +1,43 @@
+"0","```r
+# Create variable for deltas and first and second lag of the delta
+dist_deltas <- dists %>% 
+  group_by(State, District) %>% 
+  mutate(delta_reading = std35_std1_and_up - lag(std35_std1_and_up, order_by = year), delta_math = std35_subtraction_and_up - lag(std35_subtraction_and_up)) %>%
+  mutate(delta_reading_lagged = lag(delta_reading, order_by = year), delta_reading_dbl_lag = lag(delta_reading, n= 2, order_by = year)) %>%
+  arrange(State, District, year)
+
+
+# Calculate autocorrelation of delta_reading by district and then average over all districts
+# Note that since the data is already grouped by State and district, we are calculating 
+# autocorrelation for each district and then averaging across all districts
+corr_dist_deltas <- dist_deltas %>% 
+  filter(year >= 2008) %>% 
+  summarise(auto = cor(delta_reading, delta_reading_lagged)) %>%
+  ungroup() %>%
+  summarise(mean_auto=mean(auto)) %>% .$mean_auto
+
+
+# Calculate the autocorrelation in one go for all pairs of delta and delta_lagged.
+# Note that we are not doing any averaging here.
+# This should spit out a very similar value and it does.
+check_corr_dist_deltas <- dist_deltas %>% 
+  ungroup() %>%
+  filter(year >= 2008) %>% 
+  summarise(auto = cor(delta_reading, delta_reading_lagged))
+
+
+# Calculate the overall variance of the deltas
+# Note that we have to divide by 100 here to get the actual number.
+# We didn't need to do this above because we just calculated correlation and thus scale didn't matter
+var_dist_deltas <- var(dist_deltas$delta_reading/100, na.rm = TRUE)
+
+# Calculate overall variance of the district values.
+# Note that we don't want to first calculate variance of dist reading scores by state and then average
+# That would really underestimate the variance of the district scores.
+# (To understand intuition, note districts are considered iid in the model above.)
+var_dist_levels <- var(dists$std35_std1_and_up/100, na.rm = TRUE)
+
+# Calculate variance of the transitory component
+var_dist_epsilon <- -corr_dist_deltas*var_dist_deltas
+
+```"

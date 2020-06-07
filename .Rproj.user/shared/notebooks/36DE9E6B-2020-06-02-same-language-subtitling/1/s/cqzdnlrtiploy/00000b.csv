@@ -1,3 +1,0 @@
-"0","ggplot(subset(aser, state_abbr == ""MH""), aes(x = year, y = std3_read)) + "
-"0","  geom_line() +"
-"0","  labs(title = ""Maharashtra Grade 5 Reading"", y = ""% rural grade 5 children can read grade 2 text"")"

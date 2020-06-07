@@ -1,0 +1,5 @@
+"0","```r
+# Check that changes in letters and numbers is correlated -- they are highly correlated
+state_deltas %>% filter(year >= 2008) %>% ungroup() %>%
+  summarize(cor(delta_reading,delta_math, use = \"pairwise.complete.obs\"))
+```"

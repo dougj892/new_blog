@@ -1,0 +1,4 @@
+"0",""
+"0","# Get the rank of Maharashtra for one variable"
+"0","diffs %>% mutate_at(vars(-State),~min_rank(desc(.x))) %>% "
+"0","  filter(State == ""maharashtra"") %>% gt()"

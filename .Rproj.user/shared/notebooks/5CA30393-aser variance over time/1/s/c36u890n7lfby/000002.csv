@@ -1,0 +1,12 @@
+"0","```r
+# 
+corr_dist_dbl_lag <- dist_deltas %>% filter(year >= 2009) %>%
+  ungroup() %>%
+  summarize(auto =cor(delta_reading,delta_reading_dbl_lag, use = \"pairwise.complete.obs\")) %>%
+  .$auto
+
+
+# Check that changes in letters and numbers is correlated -- they are
+dist_deltas %>% filter(year != 2006) %>% ungroup() %>%
+  summarize(cor(delta_reading,delta_math))
+```"

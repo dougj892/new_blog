@@ -1,0 +1,34 @@
+"0","```r
+# Create variable for year on year change for each district
+state_deltas <- states %>% 
+  group_by(State) %>% 
+  mutate(delta_reading = std3_reading - lag(std3_reading, order_by = year), delta_math = std3_math - lag(std3_math, order_by = year)) %>%
+  mutate(delta_reading_lagged = lag(delta_reading, order_by = year), delta_reading_dbl_lag = lag(delta_reading,n=2, order_by = year)) %>%
+  arrange(State, year)
+
+
+# Calculate average autocorrelation of delta_reading
+corr_state_deltas <- state_deltas %>% 
+  filter(year >= 2008) %>% 
+  summarise(auto = cor(delta_reading, delta_reading_lagged, use = \"pairwise.complete.obs\")) %>%
+  ungroup() %>%
+  summarise(mean_auto=mean(auto)) %>% .$mean_auto
+
+# Calculate correlation betwen delta letters and delta letters lagged for entire dataset (without first calculating for each state and then averaging).
+# this should be about the same as when we first calculate for each state and then average --> which it is.
+check_corr_state_deltas <- state_deltas %>% filter(year >= 2008) %>%
+  ungroup() %>%
+  summarize(auto =cor(delta_reading,delta_reading_lagged, use = \"pairwise.complete.obs\")) %>%
+  .$auto
+
+
+# calculate the variance of the deltas
+var_state_deltas <- var(state_deltas$delta_reading, na.rm = TRUE)
+
+# calculate the variance of the levels
+var_state_levels <- var(state_deltas$std3_reading, na.rm = TRUE)
+
+# calculate variance of transitory component
+var_state_epsilon <- -corr_state_deltas*var_state_deltas
+
+```"

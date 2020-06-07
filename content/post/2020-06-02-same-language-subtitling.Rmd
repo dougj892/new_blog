@@ -1,13 +1,14 @@
 ---
-title: Same language subtitling
+title: Did same language subtitling increase reading levels in Maharashtra?
 author: ''
 date: '2020-06-02'
 slug: same-language-subtitling
 categories: []
+draft: true
 tags:
   - education
 ---
-TLDR: Maybe, but we can’t say much from the data.
+TLDR: Maybe, but we can’t say much from the data. In my next blog post, I argue that we should fund SLS anyway.
 
 # Summary
 
@@ -15,15 +16,13 @@ Between 2013 and 2015, Zee Talkies, with the support of PlanetRead and USAID, ad
 
 A quick analysis of ASER scores from Maharashtra during that period of time suggests that the strategy may have been successful.  In 2014, 53.5% of rural children in grade 5 could read a standard 2 level text.  In 2016, 62.6% could. There was a similar (though smaller) improvement in grade 3 reading scores.  (There was no improvement in grade 8 reading scores.) In The Huffington Post, Brij Kothari, founder of Planet Read [argues](https://www.huffpost.com/entry/what-caused-maharashtras-leap-in-reading_b_589d1277e4b0e172783a9a8f) argues that this jump in reading scores was likely caused by the SLS.
 
-I’m a big fan of same language subtitling (see the end of this post for why), but I wanted to see whether this evidence would stand up to greater scrutiny.  In this blog post, I use a larger dataset of ASER data going back to 2007 (a year after ASER started) and the synthetic control approach to more rigorously test this claim. Unfortunately, the larger dataset and more sophisticated methods show that there is little evidence to either support or reject this claim.  At the end of this blog post, I argue that even without this evidence, I believe that investing in SLS makes sense. 
+In this blog post, I use a larger dataset of ASER data going back to 2007 (a year after ASER started) and the synthetic control approach to more rigorously test this claim. Unfortunately, the larger dataset and more sophisticated methods show that there is little evidence to either support or reject this claim.  
 
-To get the code for this post, see here. For the ASER dataset see here. Although not visible on my website, this post was created as an R notebook with code embedded and I only use a single dataset in the entire post, so it should be fairly easy to inspect the code. 
+All code for this post is here. The ASER dataset is [here]("https://raw.githubusercontent.com/dougj892/public-datasets/master/ASER%20trends%20over%20time.csv"). 
 
 # Same Language Subtitling
 
-The idea behind SLS is pretty simple: kids naturally follow the subtitles as they listen to a video and thus pick up on spelling.  For an example of SLS, check out this video from Planet Read:
-
-![](https://www.youtube.com/watch?v=MHGSG1QmbgQ)
+The idea behind SLS is pretty simple: kids naturally follow the subtitles as they listen to a video and thus pick up on spelling.  For an example of SLS, check out [this video](https://www.youtube.com/watch?v=MHGSG1QmbgQ) from Planet Read.
 
 The beauty of SLS is that the number of learners reached per dollar spent is, potentially, phenomenally high. In India, TV ownership is relatively high even among low income households.  And the costs of adding subtitles, while not negligible, are pretty modest.  (See the graph in my recent [Scroll article](https://scroll.in/article/961937/small-screen-big-impact-educational-tv-could-be-indias-next-frontier-in-remote-learning) with Rob for more data on TV ownership by socio-economic status.) Kothari estimates that adding SLS to all programming in India would cost approximately XXX.  In addition, these costs would likely come down over time as TV channels could simply demand scripts for new content. 
 
@@ -47,18 +46,14 @@ aser <- read_csv("https://raw.githubusercontent.com/dougj892/public-datasets/mas
 ggplot(subset(aser, state_abbr == "MH"), aes(x = year, y = std5_read)) + 
   geom_line() +
   labs(title = "Maharashtra Grade 5 Reading", y = "% rural grade 5 children can read grade 2 text")
-
-ggplot(subset(aser, state_abbr == "MH"), aes(x = year, y = std3_read)) + 
-  geom_line() +
-  labs(title = "Maharashtra Grade 3 Reading", y = "% rural grade 3 children can read grade 1 text")
 ```
-Now, let's look at the changes in Maharashtra between 2014 and 2016 on all of the ASER indicators and compare these changes to changes in other states so we can get a sense of whether the changes in Maharashtra are relatively large. 
+Now, let's look at the changes in Maharashtra between 2013 and 2016 on all of the ASER indicators and compare these changes to changes in other states so we can get a sense of whether the changes in Maharashtra are relatively large. 
 
 ```{r, echo = FALSE}
-# Create dataset of first differences
-diffs <- aser %>% filter(year >= 2012) %>% group_by(State) %>% 
+# Generate dateset of deltas from 2013 to 2016
+diffs <- aser %>% filter((year == 2013) | (year == 2016)) %>% group_by(State) %>%
   mutate_at(vars(starts_with("std")), ~.x-lag(.x, order_by = year)) %>% 
-  filter(year != 2012) %>% 
+  filter(year == 2016) %>% 
   ungroup()
 
 diffs_long <- diffs %>% pivot_longer(starts_with("std"), names_to = "temp", values_to = "diff") %>% 
@@ -66,7 +61,7 @@ diffs_long <- diffs %>% pivot_longer(starts_with("std"), names_to = "temp", valu
 
 
 # plot the reading changes for 2016
-ggplot(subset(diffs_long, year == 2016), aes(x = State, y = diff, fill=factor(ifelse(State=="maharashtra","Highlighted","Normal")))) + 
+ggplot(diffs_long, aes(x = State, y = diff, fill=factor(ifelse(State=="maharashtra","Highlighted","Normal")))) + 
   scale_fill_manual(name = "area", values=c("red","grey50"), guide= FALSE) +
   geom_bar(stat = "identity")+
   facet_grid(subject ~ class) +
@@ -99,11 +94,77 @@ To apply the synthetic control approach, we must specify a set of predictors and
 
 I also specify a vector which controls how much weight to assign each of these predictors in the matching process. (In most contexts, you can let the Synth package do this by figuring out which predictors best predict the outcome variable prior to the intervention.  In our case, this wouldn't work since, for example, 2016 grade 5 math scores would not do a good job of predicting 2008 grade 5 reading.) See the code for details of this vector.
 
-```{r}
+```{r include = FALSE}
+# Change 2016 to 2015. Otherwise, the lack of 2015 throws an error.
+aser$year[aser$year ==2016] <- 2015
 
+# list the states with any NAs for std3_read or std5_read and then drop them. 
+#  I also drop 2006 data because for some reason that is giving me the unbalanced error
+states_w_na <- unique(aser$state_abbr[is.na(aser$std3_read) | is.na(aser$std5_read)])
+aser <- aser %>% filter(!(state_abbr %in% states_w_na)) %>% 
+  filter(year != 2006) 
+  
+# Create index for state (this is required by the Synth package)
+aser <- aser %>% group_by(state_abbr) %>% mutate(id = group_indices())
 ```
 
+```{r include = FALSE}
+# Estimate SCM just for MH
+v <- c(.15,.2,.2,.2,.25)
 
+dataprep.mh <- dataprep(foo = as.data.frame(aser),
+           predictors = c("std3_read", "std5_read"),
+           predictors.op = "mean",
+           time.predictors.prior = 2007:2013,
+           special.predictors = list(
+             list("std5_read", 2012:2013, "mean"),
+             list("std3_read", 2013, "mean"),
+             list("std5_math", 2014:2015, "mean")
+           ),
+           dependent = "std5_read",
+           unit.variable = "id",
+           unit.names.variable = "state_abbr",
+           time.variable = "year",
+           treatment.identifier = 11,
+           controls.identifier = seq(1,max(aser$id),1)[-11],
+           time.optimize.ssr = 2007:2013,
+           time.plot = 2007:2015)
+mh <- synth(data.prep.obj = dataprep.mh, custom.v = v)
+mh.tables <- synth.tab(mh, dataprep.mh)
+
+# Estimate placebo effect for each state. Technically, i should drop MH first but it doesn't make much of a difference
+placebo_effects <- function(i) {
+  dataprep.temp <- dataprep(foo = as.data.frame(aser),
+           predictors = c("std3_read", "std5_read"),
+           predictors.op = "mean",
+           time.predictors.prior = 2007:2013,
+           special.predictors = list(
+             list("std5_read", 2012:2013, "mean"),
+             list("std3_read", 2013, "mean"),
+             list("std5_math", 2014:2015, "mean")
+           ),
+           dependent = "std5_read",
+           unit.variable = "id",
+           unit.names.variable = "state_abbr",
+           time.variable = "year",
+           treatment.identifier = 11,
+           controls.identifier = seq(1,max(aser$id),1)[-11],
+           time.optimize.ssr = 2007:2013,
+           time.plot = 2007:2015)
+  synth.out <- synth(data.prep.obj = dataprep.temp, custom.v = v)
+  gaps <- dataprep.temp$Y1plot - (dataprep.temp$Y0plot %*% synth.out$solution.w)
+  return(gaps[length(gaps)])
+}
+effects <- map_dbl(1:max(aser$id), placebo_effects)
+```
+
+Create a graph showing the effects.
+
+```{r}
+results <- aser %>% count(state_abbr, id) %>% 
+  arrange(id) %>% select(-n) %>% 
+  cbind(effects) %>% rename("effect" =...3 )
+```
 
 
 

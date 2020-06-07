@@ -1,0 +1,15 @@
+"0","```r
+
+
+corr_state_dbl_lag <- state_deltas %>% filter(year >= 2009) %>%
+  ungroup() %>%
+  summarize(auto =cor(delta_reading,delta_reading_dbl_lag, use = \"pairwise.complete.obs\")) %>%
+  .$auto
+
+
+temp <- state_deltas %>% filter(year >= 2009) %>%
+  group_by(State) %>%
+  summarize(auto =cor(delta_reading,delta_reading_dbl_lag, use = \"pairwise.complete.obs\"))
+
+
+```"
