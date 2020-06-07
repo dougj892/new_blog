@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020. Site design by &lt;a href=&#34;https://github.com/ribic&#34;&gt;Emir Ribic</copyright>
-    <lastBuildDate>Tue, 02 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 07 Jun 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/education/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Why I support same language subtiting</title>
+      <link>/post/why-i-support-same-language-subtiting/</link>
+      <pubDate>Sun, 07 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/why-i-support-same-language-subtiting/</guid>
+      <description>In the fall, India’s ministry of information and broadcasting announced that it would require all major TV channels to add “same language subtitles” (SLS) – i.e. subtitles in the same language as the content to the programming. The rules stipulate that channels must have at least one program with subtitles in 2019 and ramp up to 50% of programming with subtitles by 2025.
+The motivation for the rule is that it will (hopefully) help children learn to read.</description>
+    </item>
     
     <item>
       <title>Did same language subtitling increase reading levels in Maharashtra?</title>
@@ -18,7 +28,7 @@
       <pubDate>Tue, 02 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>/post/same-language-subtitling/</guid>
-      <description>TLDR: Maybe, but we can’t say much from the data.
+      <description>TLDR: Maybe, but we can’t say much from the data. In my next blog post, I argue that we should fund SLS anyway.
 SummaryBetween 2013 and 2015, Zee Talkies, with the support of PlanetRead and USAID, added subtitles to all of the songs of many of the Marathi movies it broadcast. The organizers of the project hoped that by adding the subtitles, a strategy known as “same language subtitling,” they would get children to read along as they listened to the songs and thus improve their reading skills.</description>
     </item>
     

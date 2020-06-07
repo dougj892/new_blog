@@ -7,7 +7,7 @@
 <title>Did same language subtitling increase reading levels in Maharashtra? | Doug Johnson&#39;s website</title>
 
 <meta property='og:title' content='Did same language subtitling increase reading levels in Maharashtra? - Doug Johnson&#39;s website'>
-<meta property='og:description' content='TLDR: Maybe, but we can’t say much from the data.
+<meta property='og:description' content='TLDR: Maybe, but we can’t say much from the data. In my next blog post, I argue that we should fund SLS anyway.
 SummaryBetween 2013 and 2015, Zee Talkies, with the support of PlanetRead and USAID, added subtitles to all of the songs of many of the Marathi movies it broadcast. The organizers of the project hoped that by adding the subtitles, a strategy known as “same language subtitling,” they would get children to read along as they listened to the songs and thus improve their reading skills.'>
 <meta property='og:url' content='/post/same-language-subtitling/'>
 <meta property='og:site_name' content='Doug Johnson&#39;s website'>
@@ -113,13 +113,13 @@ SummaryBetween 2013 and 2015, Zee Talkies, with the support of PlanetRead and U
       
 
 
-<p>TLDR: Maybe, but we can’t say much from the data.</p>
+<p>TLDR: Maybe, but we can’t say much from the data. In my next blog post, I argue that we should fund SLS anyway.</p>
 <div id="summary" class="section level1">
 <h1>Summary</h1>
 <p>Between 2013 and 2015, Zee Talkies, with the support of PlanetRead and USAID, added subtitles to all of the songs of many of the Marathi movies it broadcast. The organizers of the project hoped that by adding the subtitles, a strategy known as “same language subtitling,” they would get children to read along as they listened to the songs and thus improve their reading skills.</p>
 <p>A quick analysis of ASER scores from Maharashtra during that period of time suggests that the strategy may have been successful. In 2014, 53.5% of rural children in grade 5 could read a standard 2 level text. In 2016, 62.6% could. There was a similar (though smaller) improvement in grade 3 reading scores. (There was no improvement in grade 8 reading scores.) In The Huffington Post, Brij Kothari, founder of Planet Read <a href="https://www.huffpost.com/entry/what-caused-maharashtras-leap-in-reading_b_589d1277e4b0e172783a9a8f">argues</a> argues that this jump in reading scores was likely caused by the SLS.</p>
-<p>I’m a big fan of same language subtitling (see the end of this post for why), but I wanted to see whether this evidence would stand up to greater scrutiny. In this blog post, I use a larger dataset of ASER data going back to 2007 (a year after ASER started) and the synthetic control approach to more rigorously test this claim. Unfortunately, the larger dataset and more sophisticated methods show that there is little evidence to either support or reject this claim. At the end of this blog post, I argue that even without this evidence, I believe that investing in SLS makes sense.</p>
-<p>To get the code for this post, see here. For the ASER dataset see here. Although not visible on my website, this post was created as an R notebook with code embedded and I only use a single dataset in the entire post, so it should be fairly easy to inspect the code.</p>
+<p>In this blog post, I use a larger dataset of ASER data going back to 2007 (a year after ASER started) and the synthetic control approach to more rigorously test this claim. Unfortunately, the larger dataset and more sophisticated methods show that there is little evidence to either support or reject this claim.</p>
+<p>All code for this post is here. The ASER dataset is <a href="%22https://raw.githubusercontent.com/dougj892/public-datasets/master/ASER%20trends%20over%20time.csv%22">here</a>.</p>
 </div>
 <div id="same-language-subtitling" class="section level1">
 <h1>Same Language Subtitling</h1>
@@ -131,9 +131,9 @@ SummaryBetween 2013 and 2015, Zee Talkies, with the support of PlanetRead and U
 <h1>Basic analysis of ASER Data</h1>
 <p>Before performing more sophisticated analyses, it’s useful to first explore our data. In this, and the rest of the analyses on this page, I focus on the 4 foundational literacy and numeracy scores included in the ASER trends over time report: portion of grade 3 children who can read a grade 1 text, portion of grade 5 children who can read a grade 2 text, portion of grade 3 children who can perform subtraction, and the portion of grade 5 children who can perform division. While individual ASER reports from each year include other indicators, I have data for these indicators going back in time.</p>
 <p>First, let’s look at Maharashtra’s grade 5 reading scores over time. (The graph for grade 3 reading looks very similar.)</p>
-<p><img src="/post/2020-06-02-same-language-subtitling_files/figure-html/unnamed-chunk-1-1.png" width="672" /><img src="/post/2020-06-02-same-language-subtitling_files/figure-html/unnamed-chunk-1-2.png" width="672" />
-Now, let’s look at the changes in Maharashtra between 2014 and 2016 on all of the ASER indicators and compare these changes to changes in other states so we can get a sense of whether the changes in Maharashtra are relatively large.</p>
-<pre><code>## Warning: Removed 6 rows containing missing values (position_stack).</code></pre>
+<p><img src="/post/2020-06-02-same-language-subtitling_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+Now, let’s look at the changes in Maharashtra between 2013 and 2016 on all of the ASER indicators and compare these changes to changes in other states so we can get a sense of whether the changes in Maharashtra are relatively large.</p>
+<pre><code>## Warning: Removed 9 rows containing missing values (position_stack).</code></pre>
 <p><img src="/post/2020-06-02-same-language-subtitling_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>The figures reveal a few things. First, the jump in grade 5 reading levels in Maharashtra between 2014 and 2016 was large compared to other states. In fact, Maharashtra experienced the largest gain in grade 5 literacy of any state. In addition, the gain in grade 5 math was much more modest. Both of these facts suggest that something caused an increase in Maharashtra’s literacy levels. On the other hand, gains in grade 3 reading were much more modest and were similar to gains in grade 3 math. In addition, looking at reading scores over time it seems like Maharashtra may just be bouncing back from one particularly bad year.</p>
 <p>My takeaway from these figures is that Kothari’s argument is plausible but by no means certain. The reading gains are large but, on the other hand, the data are noisy.</p>
@@ -151,59 +151,12 @@ Now, let’s look at the changes in Maharashtra between 2014 and 2016 on all of 
 <p>There is now a cottage industry of synthetic control approaches. I use the original synthetic control approach as described in Abadie, Diamond, and Hainmuller due to the availability of the R Synth package to apply this approach.</p>
 <p>To apply the synthetic control approach, we must specify a set of predictors and a set of linear combinations of the pre-intervention outcomes variables to generate the synthetic control match. For predictors, I use grade 3 reading scores in 2014 and grade 5 math scores in 2016. (It is Ok to use “predictors” measured after the intervention as long as the intervention doesn’t effect those predictors.) For linear combinations of the pre-intervention outcome variables, I use the mean from 2007 to 2014 and the mean in 2013 and 2014.</p>
 <p>I also specify a vector which controls how much weight to assign each of these predictors in the matching process. (In most contexts, you can let the Synth package do this by figuring out which predictors best predict the outcome variable prior to the intervention. In our case, this wouldn’t work since, for example, 2016 grade 5 math scores would not do a good job of predicting 2008 grade 5 reading.) See the code for details of this vector.</p>
-<pre class="r"><code># temp: Change 2016 to 2015 to see if it fixes the balanced panel error
-aser$year[aser$year ==2016] &lt;- 2015
-
-# list the states with any NAs for std3_read or std5_read
-states_w_na &lt;- unique(aser$state_abbr[is.na(aser$std3_read) | is.na(aser$std5_read)])
-
-# drop these states from the dataset (they are all small and unlikely to be good matches anyway). I also drop 2006 data because for some reason that is giving me the unbalanced error
-aser &lt;- aser %&gt;% filter(!(state_abbr %in% states_w_na)) %&gt;% 
-  filter(year != 2006) 
-  
-# Create index for state 
-aser &lt;- aser %&gt;% group_by(state_abbr) %&gt;% mutate(id = group_indices())</code></pre>
-<pre><code>## Warning: `group_indices()` is deprecated as of dplyr 1.0.0.
-## Please use `cur_group_id()` instead.
-## This warning is displayed once every 8 hours.
-## Call `lifecycle::last_warnings()` to see where this warning was generated.</code></pre>
-<pre class="r"><code>dataprep.out &lt;- dataprep(foo = as.data.frame(aser),
-         predictors = c(&quot;std3_read&quot;, &quot;std5_read&quot;),
-         predictors.op = &quot;mean&quot;,
-         time.predictors.prior = 2007:2014,
-         special.predictors = list(
-           list(&quot;std3_read&quot;, 2014, &quot;mean&quot;),
-           list(&quot;std5_math&quot;, 2015, &quot;mean&quot;)
-         ),
-         dependent = &quot;std5_read&quot;,
-         unit.variable = &quot;id&quot;,
-         unit.names.variable = &quot;state_abbr&quot;,
-         time.variable = &quot;year&quot;,
-         treatment.identifier = 13,
-         controls.identifier = seq(1,max(aser$id),1)[-13],
-         time.optimize.ssr = 2007:2014,
-         time.plot = 2007:2015)
-
-synth.out &lt;- synth(data.prep.obj = dataprep.out)</code></pre>
-<pre><code>## 
-## X1, X0, Z1, Z0 all come directly from dataprep object.
-## 
-## 
-## **************** 
-##  searching for synthetic control unit  
-##  
-## 
-## **************** 
-## **************** 
-## **************** 
-## 
-## MSPE (LOSS V): 0.001781073 
-## 
-## solution.v:
-##  0.04989788 0.9140548 0.0357756 0.0002717312 
-## 
-## solution.w:
-##  0.0001102419 5.39894e-05 8.74506e-05 8.92179e-05 8.11159e-05 0.395573 0.0001896344 8.06877e-05 6.12884e-05 0.3218252 2.42335e-05 3.515e-07 8.21897e-05 8.70206e-05 7.10194e-05 0.0001073709 8.92873e-05 5.29403e-05 0.2801784 0.0001168861 8.04506e-05 0.0009579856</code></pre>
+<p>Create a graph showing the effects.</p>
+<pre class="r"><code>results &lt;- aser %&gt;% count(state_abbr, id) %&gt;% 
+  arrange(id) %&gt;% select(-n) %&gt;% 
+  cbind(effects) %&gt;% rename(&quot;effect&quot; =...3 )</code></pre>
+<pre><code>## New names:
+## * NA -&gt; ...3</code></pre>
 </div>
 
       
