@@ -1,5 +1,0 @@
-"0","library(tidyverse); library(Synth)"
-"0","aser <- read_csv(""https://raw.githubusercontent.com/dougj892/public-datasets/master/ASER%20trends%20over%20time.csv"") %>% "
-"0","  mutate_at(vars(-state_abbr, -State), as.numeric) %>% "
-"0","  select(year, State, state_abbr, std3_read = std3_read_std1_all, std5_read = std5_read_std2_all, std3_math  = std3_subtract_all, std5_math = std5_divis_all) %>%"
-"0","  filter(year != 2018)"
