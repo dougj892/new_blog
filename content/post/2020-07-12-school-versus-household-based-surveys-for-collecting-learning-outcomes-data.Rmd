@@ -19,11 +19,13 @@ In developing countries, you often only have (a) -- high enrollment. Typically, 
 
 An alternative to the school-based approach which I think makes more sense in developing countries is to instead randomly select households. That is, you would randomly select villages, then randomly select households within each village, and finally administer the assessment to each child in each randomly selected household. This is the approach that ASER uses and seems to work really well.
 
-# Using an existing household survey to collect learning outcomes data
+# Using existing household surveys to collect learning outcomes data
 
 I think that the ideal way of collecting learning outcomes data in most developing countries would be to add a short, basic learning outcomes module to an existing large household survey like the DHS or LSMS. ASER has proved that you can get a good measure of a child's basic literacy and numeracy in very little time so it wouldn't add much to the total survey time or cost. 
 
-Of course, getting the org running an existing large household survey to add a module to their survey is never an easy task. Out of curiosity (and, evidently, lack of better things to do) I decided to look at whether it would be possible to get reasonably precise estimates of learning outcomes by administering a learning outcomes assessment to just a sub-sample of children included in a larger household survey.
+Of course, getting the org running an existing large household survey to add a module to their survey is never an easy task. Out of curiosity (and, evidently, lack of better things to do) I decided to look at whether it would be possible to get reasonably precise estimates of learning outcomes by administering a learning outcomes assessment to just a sub-sample of children included in a larger household survey. My motivation was that, at least in theory, administering a learning module to a sub-sample of respondents rather than the full sample is lower cost and hassle and thus it might be easier to convince someone to do this than to administer the module to the full sample. (With tools like SurveyCTO it is pretty easy to randomly select a sub-sample on the spot these days.) In practice, the procedures for adding modules / questions to existing major surveys like the DHS or NSSO rounds are extremely bureaucratic so this might just be wishful thinking on my part.
+
+# Estimating precision from estimating learning levels using a sub-sample from a larger survey
 
 In theory, you can get reasonably high precision using only a sub-sample of a larger survey because a) you can draw a random sub-sample (i.e. without having to cluster) from the larger sample and b) a household survey like the DHS  includes a lot of additional variables which are predictive of learning outcomes. To understand the first reason, suppose that sample size of the the existing household survey is so large that you can effectively consider it the whole population. If you draw a simple random sub-sample of size $N_{sub}$ from the larger sample then your standard errors will be about as large as they would be if you drew a simple random sample from the entire population and much smaller than they would be under the typically sampling approach of two-stage clustering (e.g. selecting villages then hamlets). To understand the second reason, suppose that there is a variable in the larger sample (such as household wealth) that is extremely highly predictive of learning outcomes. You could then use this variable as an auxiliary variable when generating your estimates (or when selecting your sub-sample as a strata variable).
 
@@ -113,7 +115,7 @@ ggreg_error <- function(splits){
   preds_sample <- augment(mod, newdata = sample, type.predict = "response")
 
   # Calculate the generalized GREG (see Pfefferman eq 4.8 for details)
-  ggreg <- mean(preds_other$.fitted, na.rm = TRUE) + mean(sample$ASER4, na.rm = TRUE)/rho - mean(preds_sample$.fitted, na.rm = TRUE)/rho
+  ggreg <- mean(preds_other$.fitted, na.rm = TRUE)*((rho-1)/rho) + mean(sample$ASER4, na.rm = TRUE)/rho 
 
   # Return   
   return(list(true-ggreg, true- mean(sample$ASER4, na.rm=TRUE)))
