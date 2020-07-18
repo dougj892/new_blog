@@ -9,7 +9,7 @@ tags:
   - Sampling
 ---
 
-I recently wrote a working paper in which I look at the reliability of learning outcomes data in India. (I'll add the link soon.) The main findings of the paper are a) the government-run survey of learning outcomes (called the NAS) likely contains a lot of noise and b) the main independent survey of learning outcomes (ASER) is a tad bit noisier than the survey's sample size would lead one to believe.
+I recently wrote a [working paper](https://www.riseprogramme.org/sites/www.riseprogramme.org/files/inline-files/Johnson-Assessing_the_Assessments.pdf) in which I look at the reliability of learning outcomes data in India. The main findings of the paper are a) the government-run survey of learning outcomes (called the NAS) likely contains a lot of noise and b) the main independent survey of learning outcomes (ASER) is a tad bit noisier than the survey's sample size would lead one to believe.
 
 In the process of working on the paper, I spent a bit of time looking at learning outcomes surveys across the world. Something that somewhat surprised me is that most learning outcomes surveys, in both rich countries (e.g. PISA) and developing countries (e.g. SACMEQ), are school-based. That is, the surveyors randomly select a bunch of schools, then randomly select a bunch of students in each selected school, and finally administer the assessment to each student. 
 

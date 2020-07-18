@@ -7,7 +7,8 @@
 <title>School versus household based surveys for collecting learning outcomes data | Doug Johnson&#39;s website</title>
 
 <meta property='og:title' content='School versus household based surveys for collecting learning outcomes data - Doug Johnson&#39;s website'>
-<meta property='og:description' content='I recently wrote a working paper in which I look at the reliability of learning outcomes data in India. (I’ll add the link soon.) The main findings of the paper are a) the government-run survey of learning outcomes (called the NAS) likely contains a lot of noise and b) the main independent survey of learning outcomes (ASER) is a tad bit noisier than the survey’s sample size would lead one to believe.'>
+<meta property='og:description' content='I recently wrote a working paper in which I look at the reliability of learning outcomes data in India. The main findings of the paper are a) the government-run survey of learning outcomes (called the NAS) likely contains a lot of noise and b) the main independent survey of learning outcomes (ASER) is a tad bit noisier than the survey’s sample size would lead one to believe.
+In the process of working on the paper, I spent a bit of time looking at learning outcomes surveys across the world.'>
 <meta property='og:url' content='/post/school-versus-household-based-surveys-for-collecting-learning-outcomes-data/'>
 <meta property='og:site_name' content='Doug Johnson&#39;s website'>
 <meta property='og:type' content='article'><meta property='og:image' content='https://www.gravatar.com/avatar/9f47a5820df24e7aae1e744e9b53bc38?s=256'><meta property='article:section' content='Post'><meta property='article:tag' content='education'><meta property='article:tag' content='Sampling'><meta property='article:published_time' content='2020-07-12T00:00:00Z'/><meta property='article:modified_time' content='2020-07-12T00:00:00Z'/><meta name='twitter:card' content='summary'><meta name='twitter:site' content='@dougj8921'><meta name='twitter:creator' content='@dougj8921'>
@@ -116,15 +117,18 @@
       
 
 
-<p>I recently wrote a working paper in which I look at the reliability of learning outcomes data in India. (I’ll add the link soon.) The main findings of the paper are a) the government-run survey of learning outcomes (called the NAS) likely contains a lot of noise and b) the main independent survey of learning outcomes (ASER) is a tad bit noisier than the survey’s sample size would lead one to believe.</p>
+<p>I recently wrote a <a href="https://www.riseprogramme.org/sites/www.riseprogramme.org/files/inline-files/Johnson-Assessing_the_Assessments.pdf">working paper</a> in which I look at the reliability of learning outcomes data in India. The main findings of the paper are a) the government-run survey of learning outcomes (called the NAS) likely contains a lot of noise and b) the main independent survey of learning outcomes (ASER) is a tad bit noisier than the survey’s sample size would lead one to believe.</p>
 <p>In the process of working on the paper, I spent a bit of time looking at learning outcomes surveys across the world. Something that somewhat surprised me is that most learning outcomes surveys, in both rich countries (e.g. PISA) and developing countries (e.g. SACMEQ), are school-based. That is, the surveyors randomly select a bunch of schools, then randomly select a bunch of students in each selected school, and finally administer the assessment to each student.</p>
 <p>This makes sense in rich countries where you have a) high enrollment, b) accurate and up to date lists of schools, c) high attendance, d) high rates of basic literacy (and thus high capacity to take a paper and pencil test), and e) low incentives for teachers or other administrators to cheat (in the sense that their potential financial gains are a small fraction of what they stand to lose if they are caught).</p>
 <p>In developing countries, you often only have (a) – high enrollment. Typically, there is no comprehensive roster of all schools due to the proliferation of low-cost, informal private schools. Attendance on exam day cannot be guaranteed. And a large share of students don’t have sufficient reading skills to take a paper and pencil test.</p>
 <p>An alternative to the school-based approach which I think makes more sense in developing countries is to instead randomly select households. That is, you would randomly select villages, then randomly select households within each village, and finally administer the assessment to each child in each randomly selected household. This is the approach that ASER uses and seems to work really well.</p>
-<div id="using-an-existing-household-survey-to-collect-learning-outcomes-data" class="section level1">
-<h1>Using an existing household survey to collect learning outcomes data</h1>
+<div id="using-existing-household-surveys-to-collect-learning-outcomes-data" class="section level1">
+<h1>Using existing household surveys to collect learning outcomes data</h1>
 <p>I think that the ideal way of collecting learning outcomes data in most developing countries would be to add a short, basic learning outcomes module to an existing large household survey like the DHS or LSMS. ASER has proved that you can get a good measure of a child’s basic literacy and numeracy in very little time so it wouldn’t add much to the total survey time or cost.</p>
-<p>Of course, getting the org running an existing large household survey to add a module to their survey is never an easy task. Out of curiosity (and, evidently, lack of better things to do) I decided to look at whether it would be possible to get reasonably precise estimates of learning outcomes by administering a learning outcomes assessment to just a sub-sample of children included in a larger household survey.</p>
+<p>Of course, getting the org running an existing large household survey to add a module to their survey is never an easy task. Out of curiosity (and, evidently, lack of better things to do) I decided to look at whether it would be possible to get reasonably precise estimates of learning outcomes by administering a learning outcomes assessment to just a sub-sample of children included in a larger household survey. My motivation was that, at least in theory, administering a learning module to a sub-sample of respondents rather than the full sample is lower cost and hassle and thus it might be easier to convince someone to do this than to administer the module to the full sample. (With tools like SurveyCTO it is pretty easy to randomly select a sub-sample on the spot these days.) In practice, the procedures for adding modules / questions to existing major surveys like the DHS or NSSO rounds are extremely bureaucratic so this might just be wishful thinking on my part.</p>
+</div>
+<div id="estimating-precision-from-estimating-learning-levels-using-a-sub-sample-from-a-larger-survey" class="section level1">
+<h1>Estimating precision from estimating learning levels using a sub-sample from a larger survey</h1>
 <p>In theory, you can get reasonably high precision using only a sub-sample of a larger survey because a) you can draw a random sub-sample (i.e. without having to cluster) from the larger sample and b) a household survey like the DHS includes a lot of additional variables which are predictive of learning outcomes. To understand the first reason, suppose that sample size of the the existing household survey is so large that you can effectively consider it the whole population. If you draw a simple random sub-sample of size <span class="math inline">\(N_{sub}\)</span> from the larger sample then your standard errors will be about as large as they would be if you drew a simple random sample from the entire population and much smaller than they would be under the typically sampling approach of two-stage clustering (e.g. selecting villages then hamlets). To understand the second reason, suppose that there is a variable in the larger sample (such as household wealth) that is extremely highly predictive of learning outcomes. You could then use this variable as an auxiliary variable when generating your estimates (or when selecting your sub-sample as a strata variable).</p>
 <p>This approach, in which you collect some information for a large sample and then collect additional information for a second sub-sample is called <strong>two-phase sampling</strong>.</p>
 <p>With a bit of math and data from the IHDS we can provide more formal estimates of the sample size requirements. The description below is a bit informal. For a more formal description, check out chapter 12 in Lohr (2010) or chapter 9 in Sarndal et al (1992).</p>
@@ -202,7 +206,7 @@ ggreg_error &lt;- function(splits){
   preds_sample &lt;- augment(mod, newdata = sample, type.predict = &quot;response&quot;)
 
   # Calculate the generalized GREG (see Pfefferman eq 4.8 for details)
-  ggreg &lt;- mean(preds_other$.fitted, na.rm = TRUE) + mean(sample$ASER4, na.rm = TRUE)/rho - mean(preds_sample$.fitted, na.rm = TRUE)/rho
+  ggreg &lt;- mean(preds_other$.fitted, na.rm = TRUE)*((rho-1)/rho) + mean(sample$ASER4, na.rm = TRUE)/rho 
 
   # Return   
   return(list(true-ggreg, true- mean(sample$ASER4, na.rm=TRUE)))
@@ -217,7 +221,7 @@ simple_error_vec &lt;- map_dbl(split_obj$error, 2)
 
 sqrt_mse_ggreg &lt;- (mean(ggreg_error_vec^2))^.5
 sqrt_mse_ggreg</code></pre>
-<pre><code>## [1] 0.01964877</code></pre>
+<pre><code>## [1] 0.01969</code></pre>
 <pre class="r"><code>sqrt_mse_simple &lt;- (mean(simple_error_vec^2))^.5
 sqrt_mse_simple</code></pre>
 <pre><code>## [1] 0.02088427</code></pre>
