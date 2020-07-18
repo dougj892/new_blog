@@ -1,0 +1,113 @@
+"0","```r
+# Import NSDP data
+nsdp <- read_csv(\"https://raw.githubusercontent.com/dougj892/public-datasets/master/state%20GDP%20per%20capita.csv\")
+```"
+"1","Parsed with column specification:
+cols(
+  State = col_character(),
+  `NSDP per capita` = col_double(),
+  `Data year` = col_character()
+)
+"
+"0","```r
+# Merge NSDP data with ASER and NAS data
+aser_nas_nsdp <- aser_nas %>% left_join(gdp, by = \"State\")
+
+# Check that there are no states which didn't match
+print(paste(\"Number of unmatched states\", sum(is.na(aser_nas_nsdp$`NSDP per capita`))))
+```"
+"1","[1] \"Number of unmatched states 0\"
+"
+"0","```r
+# Create a ranking for NSDP
+aser_nas_nsdp$gdp_rank <- NA
+aser_nas_nsdp$gdp_rank[order(aser_nas_nsdp$`NSDP per capita`, decreasing = TRUE)] <- 1:nrow(aser_nas_nsdp)
+
+# Calculate pairwise correlations for the 3 datasets
+temp <- aser_nas_nsdp %>% select(ASER_2018, 'NSDP per capita', NAS)
+print(\"Pearson (regular) correlation:\")
+```"
+"1","[1] \"Pearson (regular) correlation:\"
+"
+"0","```r
+cor(temp, method = \"pearson\", use = \"pairwise.complete.obs\")
+```"
+"1","                ASER_2018 NSDP per capita       NAS
+ASER_2018       1.0000000       0.4154964 0.1872901
+NSDP per capita 0.4154964       1.0000000 0.0515147
+NAS             0.1872901       0.0515147 1.0000000
+"
+"0","```r
+print(\"Spearman (rank) correlation\")
+```"
+"1","[1] \"Spearman (rank) correlation\"
+"
+"0","```r
+cor(temp, method = \"spearman\", use = \"pairwise.complete.obs\")
+```"
+"1","                ASER_2018 NSDP per capita       NAS
+ASER_2018       1.0000000       0.3758205 0.1267176
+NSDP per capita 0.3758205       1.0000000 0.1382236
+NAS             0.1267176       0.1382236 1.0000000
+"
+"0","```r
+# Calculate correlations with p-values for null rho = 0
+cor.test(temp$ASER_2018,temp$`NSDP per capita`, use = \"pairwise.complete.obs\", method = \"pearson\")
+```"
+"1","
+	Pearson's product-moment correlation
+
+data:  temp$ASER_2018 and temp$`NSDP per capita`
+t = 2.284, df = 25, p-value = 0.03113
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ 0.04213542 0.68703188
+sample estimates:
+      cor 
+0.4154964 
+"
+"0","```r
+cor.test(temp$ASER_2018,temp$`NSDP per capita`, use = \"pairwise.complete.obs\", method = \"spearman\")
+```"
+"1","Cannot compute exact p-value with ties
+"
+"1","
+	Spearman's rank correlation rho
+
+data:  temp$ASER_2018 and temp$`NSDP per capita`
+S = 2044.8, p-value = 0.05337
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.3758205 
+"
+"0","```r
+cor.test(temp$NAS,temp$`NSDP per capita`, use = \"pairwise.complete.obs\", method = \"pearson\")
+```"
+"1","
+	Pearson's product-moment correlation
+
+data:  temp$NAS and temp$`NSDP per capita`
+t = 0.26302, df = 26, p-value = 0.7946
+alternative hypothesis: true correlation is not equal to 0
+95 percent confidence interval:
+ -0.3278634  0.4165853
+sample estimates:
+      cor 
+0.0515147 
+"
+"0","```r
+cor.test(temp$NAS,temp$`NSDP per capita`, use = \"pairwise.complete.obs\", method = \"spearman\")
+```"
+"1","Cannot compute exact p-value with ties
+"
+"1","
+	Spearman's rank correlation rho
+
+data:  temp$NAS and temp$`NSDP per capita`
+S = 3148.9, p-value = 0.483
+alternative hypothesis: true rho is not equal to 0
+sample estimates:
+      rho 
+0.1382236 
+"

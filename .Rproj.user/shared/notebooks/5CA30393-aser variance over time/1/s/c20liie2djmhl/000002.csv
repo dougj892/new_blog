@@ -1,8 +1,0 @@
-"0","```r
-df_final <- df_bar %>%
-  pivot_wider(names_from = \"bar_part\", values_from= \"value\") %>%
-  mutate(total_var = `Persistent`+`Transitory sampling`+`Transitory other`) %>%
-  mutate(share_pers = `Persistent`/total_var, share_samp = `Transitory sampling`/total_var, share_other = `Transitory other`/total_var)
-
-write_csv(df_final, file.path(output, paste(subject, \"- var deco.csv\")))
-```"

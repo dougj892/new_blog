@@ -1,0 +1,29 @@
+"0","```r
+# Create new variables and drop everything else
+kids <- ihds %>% 
+  filter(!is.na(TA8B)) %>% 
+  transmute(ASER4, RO5, HHEDUC, NPERSONS, log_pcc = log(COPC), private = ifelse((CS4 ==4), 1, 0))
+rx <- as.formula(\"ASER4 ~ log_pcc + RO5 + HHEDUC + private + NPERSONS\")
+
+# split the data
+split <- initial_split(kids, prop = .1)
+sample <- training(split)
+pop <- testing(split)
+
+# fit the model on the sample
+fit <- glm(rx, data = sample, family = binomial(link = \"probit\"))
+
+# get predictions for the next rows
+preds_pop <- augment(fit, newdata = pop, type.predict = \"response\")
+preds_sample <- augment(fit, newdata = sample, type.predict = \"response\")
+
+# Calculate the 
+true <- mean(kids$ASER4)
+
+# Calculate the generalized GREG
+ggreg <- mean(preds_pop$.fitted, na.rm = TRUE) + mean(sample$ASER4, na.rm = TRUE)/10 - mean(preds_sample$.fitted, na.rm = TRUE)/10
+
+true-ggreg
+```"
+"1","[1] 0.004986281
+"

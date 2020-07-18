@@ -1,0 +1,31 @@
+"0","```r
+# import ASER and NAS data
+aser_nas <- read_csv(\"https://raw.githubusercontent.com/dougj892/public-datasets/master/ASER%202018%20and%20NAS%202017%20govt%20school%20grade%203%20reading.csv\")
+```"
+"1","Parsed with column specification:
+cols(
+  State = col_character(),
+  state_abbr = col_character(),
+  ASER_2012 = col_double(),
+  ASER_2014 = col_double(),
+  ASER_2016 = col_double(),
+  ASER_2018 = col_double(),
+  NAS = col_double(),
+  aser_rank = col_double(),
+  nas_rank = col_double()
+)
+"
+"0","```r
+# Create graph
+ggplot(data = aser_nas,aes(x=aser_rank,y=nas_rank,label= state_abbr)) +
+  geom_abline(intercept = 0, slope = 1, color=\"orange\")  +
+  geom_point(color=\"darkblue\")  +
+  theme_bw() + 
+  labs(title=\"State Rankings Based on Language Results for Std III Students (Rural)\", x = \"Rank in ASER (2018)\", y = \"Rank in NAS (2017)\") + 
+   scale_y_continuous(breaks=c(1:28)) + scale_x_continuous(breaks=c(1:28))  + theme(panel.grid.minor = element_blank(), panel.grid.major = element_line(colour = \"gray\",size=0.1)) + 
+  geom_label_repel() 
+
+# Save graph
+ggsave(\"aser_nas_lang_ranking.png\", width = 9, height = 6 , path = figures)
+
+```"

@@ -1,0 +1,8 @@
+"0","```r
+# Estimate the mean of ASER4 for the full country
+svymean(~ASER4, ihds_svy, na.rm =TRUE)
+```"
+"1","              mean     SE
+ASER4FALSE 0.67279 0.0084
+ASER4TRUE  0.32721 0.0084
+"

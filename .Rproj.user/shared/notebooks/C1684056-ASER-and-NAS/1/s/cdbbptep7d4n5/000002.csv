@@ -1,0 +1,22 @@
+"0","```r
+aser_trends <- read_csv(\"https://raw.githubusercontent.com/dougj892/public-datasets/master/ASER%20trends%20over%20time.csv\")
+```"
+"1","Parsed with column specification:
+cols(
+  .default = col_double(),
+  State = col_character(),
+  state_abbr = col_character()
+)
+See spec(...) for full column specifications.
+"
+"0","```r
+corrs <- aser_trends %>% 
+  group_by(year) %>% 
+  summarise(pearson = cor(std3_read_std1_all, std3_subtract_all, use=\"pairwise.complete.obs\", method=\"pearson\"),
+            spearman = cor(std3_read_std1_all, std3_subtract_all, use=\"pairwise.complete.obs\", method=\"spearman\"))
+```"
+"1","`summarise()` ungrouping output (override with `.groups` argument)
+"
+"0","```r
+corrs %>% summarise_all(mean, na.rm = TRUE)
+```"

@@ -1,0 +1,30 @@
+"0","```r
+
+rho <- 20
+split_obj <- vfold_cv(kids, v = rho)
+# Calculate the true overall mean
+true <- mean(kids$ASER4)
+
+ggreg_error <- function(splits){
+  # note that I treat the assessment data as the training data.  
+  # this is because I want to fit the data on the 1/rho share of the data that is in the assessment data
+  sample <- assessment(splits)
+  other <- analysis(splits)
+  
+  mod <- glm(rx, data = sample, family = binomial)
+  
+  # fit the model to both the sample and the rest of the data
+  preds_other <- augment(fit, newdata = other, type.predict = \"response\")
+  preds_sample <- augment(fit, newdata = sample, type.predict = \"response\")
+
+
+  # Calculate the generalized GREG (see Pfefferman eq 4.8 for details)
+  ggreg <- mean(preds_other$.fitted, na.rm = TRUE) + mean(sample$ASER4, na.rm = TRUE)/rho - mean(preds_sample$.fitted, na.rm = TRUE)/rho
+  return(true-ggreg)
+}
+
+split_obj$error <- map_dbl(split_obj$splits, ggreg_error)
+
+sqrt_mse <- mean(split_obj$error^2)
+
+```"
