@@ -3,6 +3,7 @@ title: School versus household based surveys for collecting learning outcomes da
 author: ''
 date: '2020-07-12'
 slug: school-versus-household-based-surveys-for-collecting-learning-outcomes-data
+bibliography: sampling.bib
 categories: []
 tags:
   - education
@@ -23,7 +24,7 @@ An alternative to the school-based approach which I think makes more sense in de
 
 I think that the ideal way of collecting learning outcomes data in most developing countries would be to add a short, basic learning outcomes module to an existing large household survey like the DHS or LSMS. ASER has proved that you can get a good measure of a child's basic literacy and numeracy in very little time so it wouldn't add much to the total survey time or cost. 
 
-Of course, getting the org running an existing large household survey to add a module to their survey is never an easy task. Out of curiosity (and, evidently, lack of better things to do) I decided to look at whether it would be possible to get reasonably precise estimates of learning outcomes by administering a learning outcomes assessment to just a sub-sample of children included in a larger household survey. My motivation was that, at least in theory, administering a learning module to a sub-sample of respondents rather than the full sample is lower cost and hassle and thus it might be easier to convince someone to do this than to administer the module to the full sample. (With tools like SurveyCTO it is pretty easy to randomly select a sub-sample on the spot these days.) In practice, the procedures for adding modules / questions to existing major surveys like the DHS or NSSO rounds are extremely bureaucratic so this might just be wishful thinking on my part.
+Of course, getting the org running an existing large household survey to add a module to their survey is never an easy task. Out of curiosity, I decided to look at whether it would be possible to get reasonably precise estimates of learning outcomes by administering a learning outcomes assessment to just a sub-sample of children included in a larger household survey. My motivation was that, at least in theory, administering a learning module to a sub-sample of respondents rather than the full sample is lower cost and hassle and thus it might be easier to convince someone to do this than to administer the module to the full sample. (With tools like SurveyCTO it is pretty easy to randomly select a sub-sample on the spot these days.) In practice, the procedures for adding modules / questions to existing major surveys like the DHS or NSSO rounds are extremely bureaucratic so this might just be wishful thinking on my part.
 
 # Estimating precision from estimating learning levels using a sub-sample from a larger survey
 
@@ -31,7 +32,7 @@ In theory, you can get reasonably high precision using only a sub-sample of a la
 
 This approach, in which you collect some information for a large sample and then collect additional information for a second sub-sample is called **two-phase sampling**. 
 
-With a bit of math and data from the IHDS we can provide more formal estimates of the sample size requirements. The description below is a bit informal. For a more formal description, check out chapter 12 in Lohr (2010) or chapter 9 in Sarndal et al (1992). 
+With a bit of math and data from the IHDS we can provide more formal estimates of the sample size requirements. The description below is a bit informal. For a more formal description, check out chapter 12 in Lohr [-@lohr2019sampling] or chapter 9 in Sarndal et al [@sarndal2003model]. 
 
 Let $\widehat{\bar{y_f}}$ be the estimate of average learning outcomes that we would obtain if we administered the learning outcome assessment to all children in the sample (f stands for "full"). Let $\widehat{\bar{y_2}}$ be the estimate of average learning outcome if we only administer the assessment to a subsample of children (2 = "two phase"). Recall from intro stats that $Var(y)=Var(E[y|x])+E[Var(y|x)]$.  If Z is the vector indicating household inclusion in the full sample (also called the first phase sample) then...
 
@@ -133,7 +134,7 @@ sqrt_mse_ggreg
 sqrt_mse_simple <- (mean(simple_error_vec^2))^.5
 sqrt_mse_simple
 ```
-
+# References
 
 
 

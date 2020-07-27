@@ -3,22 +3,22 @@
     "path": "~/code/new_blog/content/post/2020-07-12-school-versus-household-based-surveys-for-collecting-learning-outcomes-data.Rmd",
     "project_path": "content/post/2020-07-12-school-versus-household-based-surveys-for-collecting-learning-outcomes-data.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "1881289461",
     "contents": "",
     "dirty": false,
     "created": 1594985946646.0,
     "source_on_save": false,
     "relative_order": 2,
     "properties": {
-        "cursorPosition": "12,0",
-        "scrollLine": "0"
+        "cursorPosition": "34,283",
+        "scrollLine": "27"
     },
     "folds": "",
-    "lastKnownWriteTime": 1595115768,
+    "lastKnownWriteTime": 1595818570,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1595115768551,
+    "last_content_update": 1595818570038,
     "read_only": false,
     "read_only_alternatives": []
 }

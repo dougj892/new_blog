@@ -3,6 +3,7 @@ title: School versus household based surveys for collecting learning outcomes da
 author: ''
 date: '2020-07-12'
 slug: school-versus-household-based-surveys-for-collecting-learning-outcomes-data
+bibliography: sampling.bib
 categories: []
 tags:
   - education
@@ -19,13 +20,13 @@ tags:
 <div id="using-existing-household-surveys-to-collect-learning-outcomes-data" class="section level1">
 <h1>Using existing household surveys to collect learning outcomes data</h1>
 <p>I think that the ideal way of collecting learning outcomes data in most developing countries would be to add a short, basic learning outcomes module to an existing large household survey like the DHS or LSMS. ASER has proved that you can get a good measure of a child’s basic literacy and numeracy in very little time so it wouldn’t add much to the total survey time or cost.</p>
-<p>Of course, getting the org running an existing large household survey to add a module to their survey is never an easy task. Out of curiosity (and, evidently, lack of better things to do) I decided to look at whether it would be possible to get reasonably precise estimates of learning outcomes by administering a learning outcomes assessment to just a sub-sample of children included in a larger household survey. My motivation was that, at least in theory, administering a learning module to a sub-sample of respondents rather than the full sample is lower cost and hassle and thus it might be easier to convince someone to do this than to administer the module to the full sample. (With tools like SurveyCTO it is pretty easy to randomly select a sub-sample on the spot these days.) In practice, the procedures for adding modules / questions to existing major surveys like the DHS or NSSO rounds are extremely bureaucratic so this might just be wishful thinking on my part.</p>
+<p>Of course, getting the org running an existing large household survey to add a module to their survey is never an easy task. Out of curiosity, I decided to look at whether it would be possible to get reasonably precise estimates of learning outcomes by administering a learning outcomes assessment to just a sub-sample of children included in a larger household survey. My motivation was that, at least in theory, administering a learning module to a sub-sample of respondents rather than the full sample is lower cost and hassle and thus it might be easier to convince someone to do this than to administer the module to the full sample. (With tools like SurveyCTO it is pretty easy to randomly select a sub-sample on the spot these days.) In practice, the procedures for adding modules / questions to existing major surveys like the DHS or NSSO rounds are extremely bureaucratic so this might just be wishful thinking on my part.</p>
 </div>
 <div id="estimating-precision-from-estimating-learning-levels-using-a-sub-sample-from-a-larger-survey" class="section level1">
 <h1>Estimating precision from estimating learning levels using a sub-sample from a larger survey</h1>
 <p>In theory, you can get reasonably high precision using only a sub-sample of a larger survey because a) you can draw a random sub-sample (i.e. without having to cluster) from the larger sample and b) a household survey like the DHS includes a lot of additional variables which are predictive of learning outcomes. To understand the first reason, suppose that sample size of the the existing household survey is so large that you can effectively consider it the whole population. If you draw a simple random sub-sample of size <span class="math inline">\(N_{sub}\)</span> from the larger sample then your standard errors will be about as large as they would be if you drew a simple random sample from the entire population and much smaller than they would be under the typically sampling approach of two-stage clustering (e.g. selecting villages then hamlets). To understand the second reason, suppose that there is a variable in the larger sample (such as household wealth) that is extremely highly predictive of learning outcomes. You could then use this variable as an auxiliary variable when generating your estimates (or when selecting your sub-sample as a strata variable).</p>
 <p>This approach, in which you collect some information for a large sample and then collect additional information for a second sub-sample is called <strong>two-phase sampling</strong>.</p>
-<p>With a bit of math and data from the IHDS we can provide more formal estimates of the sample size requirements. The description below is a bit informal. For a more formal description, check out chapter 12 in Lohr (2010) or chapter 9 in Sarndal et al (1992).</p>
+<p>With a bit of math and data from the IHDS we can provide more formal estimates of the sample size requirements. The description below is a bit informal. For a more formal description, check out chapter 12 in Lohr <span class="citation">(2019)</span> or chapter 9 in Sarndal et al (1992).</p>
 <p>Let <span class="math inline">\(\widehat{\bar{y_f}}\)</span> be the estimate of average learning outcomes that we would obtain if we administered the learning outcome assessment to all children in the sample (f stands for “full”). Let <span class="math inline">\(\widehat{\bar{y_2}}\)</span> be the estimate of average learning outcome if we only administer the assessment to a subsample of children (2 = “two phase”). Recall from intro stats that <span class="math inline">\(Var(y)=Var(E[y|x])+E[Var(y|x)]\)</span>. If Z is the vector indicating household inclusion in the full sample (also called the first phase sample) then…</p>
 <p><span class="math display">\[ Var(\widehat{\bar{y_2}})=Var(E[\widehat{\bar{y_2}}|Z])+E[Var(\widehat{\bar{y_2}}|Z)]\approx Var(\widehat{\bar{y_f}})+E[Var(\widehat{\bar{y_2}}|Z)] \]</span>
 Where the second approximate equality holds as long as the <span class="math inline">\(\widehat{\bar{y_2}}\)</span> is approximately an unbiased estimator of <span class="math inline">\(\widehat{\bar{y_f}}\)</span>. The second term in the equation is variance of estimator treating the full sample (i.e. the first phase sample) as the full population. Since we have a lot of auxiliary information with which to create that estimator, it’s variance is likely to be quite small.</p>
@@ -119,4 +120,12 @@ sqrt_mse_ggreg</code></pre>
 <pre class="r"><code>sqrt_mse_simple &lt;- (mean(simple_error_vec^2))^.5
 sqrt_mse_simple</code></pre>
 <pre><code>## [1] 0.02088427</code></pre>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+<div id="ref-lohr2019sampling">
+<p>Lohr, Sharon L. 2019. <em>Sampling: Design and Analysis: Design and Analysis</em>. CRC Press.</p>
+</div>
+</div>
 </div>
