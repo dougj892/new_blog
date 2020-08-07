@@ -1,0 +1,31 @@
+"0","```r
+# confirm we are looking at the right variable by looking at the variable label from Stata
+attributes(df$TA8B)
+attributes(df$RO5)$label
+
+# look at response rates to TA8B by age --> looks like there are some NAs even for 8 to 11. 
+# unclear why that is.  
+df %>%
+  group_by(RO5) %>%
+  summarise(non_na_count = sum(!is.na(TA8B)), na_count = sum(is.na(TA8B)) )
+
+# Calculate average reading score DIRECTLY
+attributes(df$STATEID)$labels
+df %>%
+  group_by(STATEID) %>%
+  summarise(weighted.mean(TA8B, na.rm = TRUE, w = WT))
+
+# Calculate average reading score USING SURVEY PACKAGE
+svyby(~TA8B, ~STATEID, df_svy, svymean, na.rm=TRUE)
+
+# Calculate average reading score USING SRVYR PACKAGE 
+# note that i can't use a formula to specify the ID var
+# also 
+df_srvyr <- df %>%
+  as_survey_design(c(psu_expanded, hh_expanded), weights = WT)
+
+df_srvyr %>%
+  group_by(STATEID) %>%
+  summarize(aser_mean = survey_mean(TA8B, na.rm =TRUE))
+
+```"

@@ -1,0 +1,11 @@
+"0","```r
+# calculate variance of TA8B
+aser_var <- var(df$TA8B, na.rm = TRUE)
+
+# fit a random effects model for PSUID and get the variance of that component
+library(lme4)
+temp <-df %>% select(TA8B,PSUID)
+fit <- lmer(TA8B ~(1|PSUID), data = temp)
+print(\"ICC is\")
+attributes(VarCorr(fit)$PSUID)$stddev / aser_var
+```"

@@ -1,0 +1,1 @@
+{"frames":[{"func":"read_dta(ind_file, n_max = 1)","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0},{"func":"readr::datasource(file)","file":"","line_number":0,"end_line_number":0,"character_number":0,"end_character_number":0}],"message":"Error in readr::datasource(file) : object 'ind_file' not found\n"}

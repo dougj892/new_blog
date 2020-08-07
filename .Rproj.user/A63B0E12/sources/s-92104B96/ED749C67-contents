@@ -1,0 +1,39 @@
+---
+title: "Utilities"
+output: html_notebook
+---
+
+Replicate Stata's codebook command -- loop through each variable in a dataframe and, if there are 10 or fewer distinct values, tab the variable and print the Stata var label.
+
+```{r}
+cnl <- function(x){
+  if (length(unique(x)) <= 10) {
+    print(attributes(x)$label)
+    print(head(table(x), 5))
+  }
+}
+```
+
+Generate a dataset of var names, var labels, and # of unqiue values
+
+```{r}
+df_labels <- function(df) {
+  varnames <- names(df)
+  labels <- lapply(df, function(x) attributes(x)$label)
+  unique_values <- lapply(df, function(x) length(unique(x)))
+  tibble(name = varnames, label = labels, unique_vals = unique_values)
+}
+
+```
+
+```{r}
+ihds_ind_dir <- "C:/Users/dougj/Documents/Data/IHDS/IHDS 2012/DS0001"
+ind_file <- file.path(ihds_ind_dir, "36151-0001-Data.dta")
+ihds_one_row <- read_dta(ind_file, n_max = 1)
+
+
+# Create dataframe of variable labels from the roster dataframe
+labels <- map_chr(ihds_one_row, function(x) as.character(attributes(x)$label)[1])
+ihds_labels <- tibble(variable = names(ihds_one_row), label = labels)
+```
+

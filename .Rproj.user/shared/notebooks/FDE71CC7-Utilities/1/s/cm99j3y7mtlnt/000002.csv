@@ -1,0 +1,12 @@
+"0","```r
+```r
+```r
+cnl <- function(x){
+  if (length(unique(x)) <= 10) {
+    print(attributes(x)$label)
+    print(head(table(x), 5))
+  }
+}
+```
+```
+```"

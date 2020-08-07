@@ -13,6 +13,15 @@
     
     
     <item>
+      <title>IHDS Quick Start Guide</title>
+      <link>/post/getting-started-with-ihds-data/</link>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/getting-started-with-ihds-data/</guid>
+      <description>I recently used data from the India Human Development Survey (IHDS) for a paper on learning outcomes data in India. IHDS is a panel survey led by Sonalde Desai and others at NCAER/UofMd which collected on a wide range of topics from ~42,000 households across India. The survey includes two rounds of data collection, the first round in 2004/5 and the second round in 2011/12. (According to the website, a third round is in the works.</description>
+    </item>
+    
+    <item>
       <title>School versus household based surveys for collecting learning outcomes data</title>
       <link>/post/school-versus-household-based-surveys-for-collecting-learning-outcomes-data/</link>
       <pubDate>Sun, 12 Jul 2020 00:00:00 +0000</pubDate>

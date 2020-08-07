@@ -1,0 +1,10 @@
+"0","```r
+ihds_ind_dir <- \"C:/Users/dougj/Documents/Data/IHDS/IHDS 2012/DS0001\"
+ind_file <- file.path(ihds_ind_dir, \"36151-0001-Data.dta\")
+ihds_one_row <- read_dta(ind_file, n_max = 1)
+
+
+# Create dataframe of variable labels from the roster dataframe
+labels <- map_chr(ihds_one_row, function(x) as.character(attributes(x)$label)[1])
+ihds_labels <- tibble(variable = names(ihds_one_row), label = labels)
+```"

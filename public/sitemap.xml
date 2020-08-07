@@ -3,12 +3,27 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/tags/education/</loc>
-    <lastmod>2020-07-12T00:00:00+00:00</lastmod>
+    <loc>/tags/data/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/getting-started-with-ihds-data/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/education/</loc>
     <lastmod>2020-07-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -19,11 +34,6 @@
   
   <url>
     <loc>/post/school-versus-household-based-surveys-for-collecting-learning-outcomes-data/</loc>
-    <lastmod>2020-07-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2020-07-12T00:00:00+00:00</lastmod>
   </url>
   

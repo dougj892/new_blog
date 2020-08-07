@@ -1,0 +1,4 @@
+"0","ihds_one_row <- read_dta(ind_file, n_max = 1)
+"
+"2","Error in readr::datasource(file) : object 'ind_file' not found
+"

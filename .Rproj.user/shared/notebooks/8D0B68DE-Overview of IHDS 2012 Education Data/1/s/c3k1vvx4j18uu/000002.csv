@@ -1,0 +1,6 @@
+"0","```r
+df <- df %>% mutate(psu_expanded = paste(STATEID, DISTID, PSUID, sep =\"-\"), hh_expanded = paste(STATEID, DISTID, PSUID, HHID, HHSPLITID, sep =\"-\"))
+# there is one row with a missing value for WT and most other variables drop that
+df <- df %>% filter(!is.na(WT))
+df_svy <- svydesign(id =~ psu_expanded + hh_expanded, weights =~ WT, data = df)
+```"

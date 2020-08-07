@@ -1,0 +1,9 @@
+"0","```r
+df_labels <- function(df) {
+  varnames <- names(df)
+  labels <- lapply(df, function(x) attributes(x)$label)
+  unique_values <- lapply(df, function(x) length(unique(x)))
+  tibble(name = varnames, label = labels, unique_vals = unique_values)
+}
+
+```"

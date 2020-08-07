@@ -1,0 +1,5 @@
+"0","ihds_ind_dir <- ""C:/Users/dougj/Documents/Data/IHDS/IHDS 2012/DS0001"""
+"0","ind_file <- file.path(ihds_ind_dir, ""36151-0001-Data.dta"")"
+"0","# read in just those variables that i need"
+"0","# this is much faster than reading in everything and then selecting"
+"0","df <- read_dta(ind_file, col_select = c(STATEID, DISTID, PSUID, HHID, HHSPLITID, PERSONID, IDPSU, WT, RO3, RO7, RO5, starts_with(""CS""), starts_with(""TA""), starts_with(""ED"")))"
