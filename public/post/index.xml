@@ -7,10 +7,30 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/dougj892&#34;&gt;Doug Johnson&lt;/a&gt; 2020. Site design by &lt;a href=&#34;https://github.com/ribic&#34;&gt;Emir Ribic</copyright>
-    <lastBuildDate>Fri, 07 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Jan 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Evidence at USAID</title>
+      <link>/post/evidence-based-programming-at-usaid/</link>
+      <pubDate>Sat, 02 Jan 2021 00:00:00 +0000</pubDate>
+      
+      <guid>/post/evidence-based-programming-at-usaid/</guid>
+      <description>Sarah Rose at the Center for Global Development recently published an excellent note on how to make USAID programming more evidence-based. As a former member of one of the groups mentioned in the article (the Evaluation and Impact Assessment group at the erstwhile Global Development Lab) and a long-time evaluator, this is a topic dear to my cold, data-driven heart. I realize that probably marks me as a member of very small fraternity, but people really should care more about making donors more evidence-based!</description>
+    </item>
+    
+    <item>
+      <title>School versus household-based sampling for learning outcomes surveys</title>
+      <link>/post/school-versus-household-based-sampling-for-learning-outcomes-surveys/</link>
+      <pubDate>Sun, 16 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/school-versus-household-based-sampling-for-learning-outcomes-surveys/</guid>
+      <description>mention that i don’t think a new survey is necessarily a good ideaThe Advantage of School-Based Sampling - Decreased CostThe obvious advantage of using school-based sampling is that it is much cheaper to implement
+Let’s suppose that we want to estimate the overall proportion of primary school students that have achieved basic literacy and numeracy.
+–&amp;gt; give the sample size and cost calculations for this.</description>
+    </item>
     
     <item>
       <title>IHDS Quick Start Guide</title>

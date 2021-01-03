@@ -15,7 +15,7 @@ While the IHDS documentation is excellent, it still takes a bit of time to go th
 
 
 # Accessing the data
-Accessing IHDS data is pretty straightforward. You can go to the IHDS webpage [here](https://ihds.umd.edu/), click on "Download Data", and follow the appropriate links or you can just click on the links below. Note that you will have to create a login ID. For more information on which specific files to download, see the next below.
+Accessing IHDS data is pretty straightforward. You can go to the IHDS webpage [here](https://ihds.umd.edu/), click on "Download Data", and follow the appropriate links or you can just click on the links below. Note that you will have to create a login ID. For more information on which specific files to download, see the next section below.
 
 * Click [here](https://www.icpsr.umich.edu/web/ICPSR/studies/22626) for just the first round of data
 * Click [here](https://www.icpsr.umich.edu/web/DSDR/studies/36151) for just the second round of data

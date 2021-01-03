@@ -1,0 +1,47 @@
+---
+title: School versus household-based sampling for learning outcomes surveys
+author: ''
+date: '2020-08-16'
+slug: school-versus-household-based-sampling-for-learning-outcomes-surveys
+categories: []
+tags:
+  - Sampling
+  - Education
+---
+
+- mention that i don't think a new survey is necessarily a good idea
+
+# The Advantage of School-Based Sampling - Decreased Cost
+
+The obvious advantage of using school-based sampling is that it is much cheaper to implement
+
+Let's suppose that we want to estimate the overall proportion of primary school students that have achieved basic literacy and numeracy.
+
+--> give the sample size and cost calculations for this. Assume $15 per primary school child.
+
+caveat that these calculations are very crude and that there are a lot other things that you could do
+
+for example, you may want to look at outcomes by grade
+
+# Problem 1 - Finding private schools
+
+- previous iterations of NAS only looked at government and private aided schools
+- with half of Indian students attending private schools, this doesn't make any sense
+- 
+
+
+# Problem 2 - Ensuring random sampling of all students
+
+- mention that this is a problem even in wealth countries
+  - Anders et al show that excluding students is why Canada does well on PISA
+  - I seem to recall that there is some research about student exclusion biasing state averages for student test scores in the US
+
+- maybe also mention that one of the reasons Vietnam scores so highly on PISA is that PISA samples from in-school 15 year olds while a lot of students drop out before they are 15 in Vietnam 
+  https://ffteducationdatalab.org.uk/2017/07/why-does-vietnam-do-so-well-in-pisa-an-example-of-why-naive-interpretation-of-international-rankings-is-such-a-bad-idea/#:~:text=1).,stronger%20than%20it%20really%20is.
+
+  
+  
+# Problem 3 - Score inflation
+
+Talk about Abhijeet's research here and also research from wealthy countries which shows the same thing
+  

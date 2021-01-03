@@ -117,7 +117,7 @@ For those of you working on India-related research, I would highly recommend che
 <p>While the IHDS documentation is excellent, it still takes a bit of time to go through it all. I wrote this blog post to serve as a “quick start” guide to help others (and my future self) quickly get up to speed and working on the data.</p>
 <div id="accessing-the-data" class="section level1">
 <h1>Accessing the data</h1>
-<p>Accessing IHDS data is pretty straightforward. You can go to the IHDS webpage <a href="https://ihds.umd.edu/">here</a>, click on “Download Data”, and follow the appropriate links or you can just click on the links below. Note that you will have to create a login ID. For more information on which specific files to download, see the next below.</p>
+<p>Accessing IHDS data is pretty straightforward. You can go to the IHDS webpage <a href="https://ihds.umd.edu/">here</a>, click on “Download Data”, and follow the appropriate links or you can just click on the links below. Note that you will have to create a login ID. For more information on which specific files to download, see the next section below.</p>
 <ul>
 <li>Click <a href="https://www.icpsr.umich.edu/web/ICPSR/studies/22626">here</a> for just the first round of data</li>
 <li>Click <a href="https://www.icpsr.umich.edu/web/DSDR/studies/36151">here</a> for just the second round of data</li>
@@ -170,7 +170,8 @@ ihds &lt;- ihds %&gt;% mutate(psu_expanded = paste(STATEID, DISTID, PSUID, sep =
 ihds &lt;- ihds %&gt;% filter(!is.na(WT))
 
 # Create variable for whether the respondent has achieved ASER at level 4. 
-# This variable is only non-empty for children aged 8-11, but 
+# This variable is only non-empty for children aged 8-11, but the functions below
+# automatically drop all other respondents.
 ihds &lt;- ihds %&gt;% mutate(ASER4 = (TA8B ==4)) %&gt;% mutate(State = as_factor(STATEID))</code></pre>
 </div>
 <div id="use-the-survey-package-to-generate-point-estimates-and-confidence-intervals" class="section level2">
